@@ -5,7 +5,7 @@ En la Fig. \ref{fig:esquema_general_ejercicio_3} se ilustra un esquema general d
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.6]{../EJ3/Recursos/system_scheme.png}
+    \includegraphics[scale=0.5]{../EJ3/Recursos/system_scheme.png}
     \caption{Esquema general del sistema propuesto}
     \label{fig:esquema_general_ejercicio_3}
 \end{figure}
@@ -34,7 +34,7 @@ arm\'onica.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.45]{../EJ3/Recursos/BasicSpectralAnalysisExample_01.png} 
+    \includegraphics[scale=0.4]{../EJ3/Recursos/BasicSpectralAnalysisExample_01.png} 
     \caption{Espectro en frecuencia}
 \end{figure}
 
@@ -55,11 +55,20 @@ para cuantificarla. La distorsi\'on total se define como se observa en la Ec. \r
     \label{eq:total_distorsion}
 \end{equation}
 
-\subsubsection{Distorsi\'on de jitter}
+\subsubsection{Jitter}
+Se define el Jitter como la desviaci\'on pr\'actica del per\'iodo de una se\~nal respecto de su valor te\'orico esperado. Este es un aspecto
+a tener en cuenta en el dise\~no y an\'alisis de osciladores, y puede clasificarse generalmente seg\'un si es aleatorio o determin\'istico.
 
-\subsubsection{Explicaci\'on conceptual de un VCO}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{../EJ3/Recursos/different-jitter-measurements.jpg}
+    \caption{Diagrama del Jitter medido en un per\'iodo o entre ciclos}
+    \label{fig:jitter_diagram}
+\end{figure}
 
-\subsubsection{Explicaci\'on conceptual del conversor}
+El jitter aleatorio corresponde a la desviaci\'on del per\'iodo provocada por el ruido t\'ermico que generan los componentes resistivos en la pr\'actica.
+Por otro lado, el jitter determin\'istico consiste en analizar las posibles desviaciones temporales, ya sea de un per\'iodo respecto del valor real, as\'i
+como entre per\'iodos de ciclos consecutivos. Esto puede observarse en la Fig. \ref{fig:jitter_diagram}.
 
 \subsection{An\'alisis de circuitos}
 

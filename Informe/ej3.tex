@@ -106,7 +106,37 @@ la se\~nal entrante, conociendo la pendiente y ordenada al origen que se desean 
 que no sea el de saturaci\'on de los amplificadores, con lo cual a menos que se haga uso de este, ser\'a necesario un circuito limitador de tensi\'on en la salida seg\'un el caso.
 
 \subsubsection{Comparador Schmitt Trigger inversor}
-% Explicar el Schmitt Trigger y sus cuentas
+El comparador Schmitt Trigger es una configuraci\'on del amplificador operacional utilizando una realimentaci\'on regenerativa o positiva,
+que lo que busca es crear un comparador con hist\'eresis para prevenir fluctuaciones u oscilaciones en la salida del mismo por el efecto de se\~nales
+con contenido no deseado de ruido. Estas configuraciones vienen en la forma de inversoras o no inversoras, y establecen dos l\'imites de comparaci\'on
+para determinar estado alto o estado bajo, y cuando no se emplea un corrimiento por offset, se encuentran sim\'etricas al cero.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{../EJ3/Recursos/diagrama_schmitt_trigger.png}
+    \caption{Diagrama del comparador con hist\'eresis}
+    \label{fig:diagrama_schmitt_trigger}
+\end{figure}
+
+En la Fig. \ref{fig:diagrama_schmitt_trigger} se puede observar la funci\'on de $V_o = f(V_i)$ del comparador Schmitt Trigger inversor,
+para el cual se propone el circuito de la Fig. \ref{fig:circuito_schmitt_trigger}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{../EJ3/Recursos/schmitt_trigger.png}
+    \caption{Circuito Schmitt Trigger inversor}
+    \label{fig:circuito_schmitt_trigger}
+\end{figure}
+
+Se plantea el potencial en las dos entradas del amplificador operacional, y dado que la transici\'on se da en torno al encuentro
+de ambos valores de tensi\'on, se igualan las expresiones y asumiendo estados alto y bajo de salida, se encuentra la expresi\'on
+de los valores de comparaci\'on.
+
+\begin{align*}
+    & V^{+} = V_o \cdot \frac{R_1}{R_1 + R_2} \\
+    & V^{-} = V_i \\
+    & \Rightarrow V_T = V_{CC_{SAT}} \cdot \frac{R_1}{R_1 + R_2}
+\end{align*}
 
 \subsubsection{Voltage Controlled Oscillator}
 % Explicar el VCO y sus cuentas

@@ -71,10 +71,39 @@ Por otro lado, el jitter determin\'istico consiste en analizar las posibles desv
 como entre per\'iodos de ciclos consecutivos. Esto puede observarse en la Fig. \ref{fig:jitter_diagram}.
 
 \subsection{An\'alisis de circuitos}
+Se busca realizar un an\'alisis de los circuitos empleados posteriormente en el dise\~no para facilitar, no s\'olo este proceso,
+sino la divisi\'on en etapas seg\'un lo requiera el sistema, teniendo en cuenta las fortalezas y debilidades de cada una de ellas.
 
 \subsubsection{Acondicionamiento lineal de se\~nal}
-% Deducción y explicación del circuito para hacer el acondicionamiento
-% lineal deseado
+En la pr\'actica suele ser necesario realizar un acondicionamiento lineal de una se\~nal de entrada, esto implica matem\'aticamente aplicar un desplazamiento
+y un escalaje sobre la magnitud de entrada, adaptando el rango de valores de entrada a un rango aceptable de salida. Se propone como circuito para realizar esta transformaci\'on
+de las magnitudes, el ilustrado en la Fig. \ref{fig:circuito_acondicionamiento_lineal}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.55]{../EJ3/Recursos/circuito_acondicionamiento_lineal.png}
+    \caption{Acondicionamiento lineal de se\~nales}
+    \label{fig:circuito_acondicionamiento_lineal}
+\end{figure}
+
+Se plantean las siguientes ecuaciones, donde se define la salida del amplificador operacional configurado como buffer o seguidor de tensi\'on $V_{OFF}$.
+
+\begin{align*}
+    & V_{OFF} = \frac{V_{CC} \cdot R_2}{R_1 + R_2} \\
+    & V_o = V_i \cdot \frac{R_4}{R_3 + R_4} \cdot \frac{R_5 + R_6}{R_5}
+    + V_{OFF} \cdot \frac{R_3}{R_3 + R_4} \cdot \frac{R_5 + R_6}{R_5}
+\end{align*}
+
+Aplicando como criterio para simplificar el manejo algebraico, resulta pr\'actico establecer que se cumpla la condici\'on
+$R_3 = R_5$ y $R_4 = R_6$.
+
+\begin{equation}
+    V_o = V_i \cdot \frac{R_4}{R_5} + V_{OFF}
+\end{equation}
+
+En conclusi\'on, este circuito con esta \'ultima expresi\'on permite de manera sencilla realizar una transformaci\'on que permita adaptar o acondicionar
+la se\~nal entrante, conociendo la pendiente y ordenada al origen que se desean como salida. Es importante mencionar que el circuito no garantiza un l\'imite de tensi\'on 
+que no sea el de saturaci\'on de los amplificadores, con lo cual a menos que se haga uso de este, ser\'a necesario un circuito limitador de tensi\'on en la salida seg\'un el caso.
 
 \subsubsection{Comparador Schmitt Trigger inversor}
 % Explicar el Schmitt Trigger y sus cuentas

@@ -1,0 +1,17 @@
+* C:\Users\Lucas\Documents\Actualmente Usando\Teoría de Circuitos\TP6\EJ3\Simulación\AcondicionamientoLineal.asc
+V1 +VCC 0 15
+V2 0 -VCC 15
+V3 Vi 0 PULSE(0 5 0.001m 10m 0.001m 0.001m 10m 5)
+R8 Vo N004 18k
+R9 0 N004 10k
+XU3 N003 N004 +VCC -VCC Vo TL08X
+R10 N003 N002 18k
+R11 N003 Vi 10k
+XU4 N001 N002 +VCC -VCC N002 TL08X
+R12 +VCC N001 330k
+R13 N001 0 24k
+.tran 0 50m 10m 0.01m
+.lib Opamps_Comparators_ST.lib
+.lib 2N7000.nxp.lib
+.backanno
+.end

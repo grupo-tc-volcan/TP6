@@ -1,0 +1,22 @@
+Circuit: * C:\Users\Lucas\Documents\Actualmente Usando\Teoría de Circuitos\TP6\EJ3\Simulación\Draft1.asc
+
+WARNING: Specified period is not longer than the sum of Trise, Tfall, and Ton for v3.  Increasing period to 0.0001001
+Direct Newton iteration for .op point succeeded.
+
+Date: Thu Nov 07 02:00:55 2019
+Total elapsed time: 0.284 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 11204
+traniter = 11156
+tranpoints = 5153
+accept = 4607
+rejected = 546
+matrix size = 69
+fillins = 36
+solver = Normal
+Matrix Compiler1: 5.05 KB object code size  1.1/0.7/[0.4]
+Matrix Compiler2: 6.18 KB object code size  0.7/0.9/[0.4]
+

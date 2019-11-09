@@ -1,0 +1,17 @@
+Board Information Report
+Filename     : C:\Users\Lucas\Documents\Actualmente Usando\Teoría de Circuitos\TP6\EJ3\Diseño de PCB\VCO_PCB.PcbDoc
+Date         : 08/11/2019
+Time         : 12:57:05 p. m.
+Time Elapsed : 00:00:00
+
+General
+    Board Size, 76.916mmx37.0586mm
+    Components on board, 50
+count : 2
+
+Routing Information
+    Routing completion, 100.00%
+    Connections, 91
+    Connections routed, 91
+    Connections remaining, 0
+count : 4

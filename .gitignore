@@ -1,0 +1,15 @@
+# Ignore files from Altium Projects
+History
+__Previews
+
+# Ignore files from LTSpice IV
+*.raw
+*.net
+*.log
+*.op
+
+# Ignore files from LaTeX
+Informe.pdf
+
+# Ignore files from draw.io
+*.drawio

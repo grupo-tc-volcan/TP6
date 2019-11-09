@@ -22,7 +22,7 @@ $f: I\!R -> I\!R$ que cumple tener un per\'iodo fundamental dado $f(t + T) = f(t
 ser proyectada sobre un espacio vectorial descripto por su base ortonormal.
 En otras palabras, la serie trigonométrica de Fourier como caso particular permite describir un se\~nal peri\'odica como combinaci\'on 
 lineal de funciones seno y coseno. Se suele denominar a cada una de estas componentes como arm\'onicos cuyas frecuencias son m\'ultiplos de la 
-frecuencia fundamental, y desde un punto de vista espectral es sencillo observar la distribuci\'on de potencia de la se\~nal para cada frecuencia
+frecuencia fundamental, y desde un punto de vista espectral se puede observar la distribuci\'on de potencia de la se\~nal para cada frecuencia
 arm\'onica.
 
 \begin{figure}[H]
@@ -42,11 +42,11 @@ La distorsi\'on arm\'onica puede ser entendida como la presencia de arm\'onicos 
 de onda esperada, esto puede pasar como consecuencia del uso de sistemas no lineales o por el l\'imite f\'isico de ancho de banda que suelen tener
 los circuitos, aunque no siempre se vuelve apreciable su efecto sobre la eliminaci\'on de los arm\'onicos deseados.
 As\'i, una se\~nal senoidal pura \'unicamente contiene su arm\'onico fundamental, y en t\'erminos del espectro en frecuencia s\'olo una componente. Esto permite
-estudiar la distorsi\'on de tales se\~nales analizando aquellos componentes arm\'onicos no deseados que pueden aparecen, y se utiliza la expresi\'on de la Ec. \ref{eq:distorsion_de_armonico}
+estudiar la distorsi\'on de tales se\~nales analizando aquellos componentes arm\'onicos no deseados que pueden aparecer, y se utiliza la expresi\'on de la Ec. \ref{eq:distorsion_de_armonico}
 para cuantificarla. La distorsi\'on total se define como se observa en la Ec. \ref{eq:total_distorsion}.
 
 \begin{equation}
-    HD_n = \frac{armonico_n}{armonico_{fundamental}}
+    HD_n = \frac{RMS_n}{RMS_{fund}}
     \label{eq:distorsion_de_armonico}
 \end{equation}
 
@@ -109,7 +109,7 @@ que no sea el de saturaci\'on de los amplificadores, con lo cual a menos que se 
 El comparador Schmitt Trigger es una configuraci\'on del amplificador operacional utilizando una realimentaci\'on regenerativa o positiva,
 que lo que busca es crear un comparador con hist\'eresis para prevenir fluctuaciones u oscilaciones en la salida del mismo por el efecto de se\~nales
 con contenido no deseado de ruido. Estas configuraciones vienen en la forma de inversoras o no inversoras, y establecen dos l\'imites de comparaci\'on
-para determinar estado alto o estado bajo, y cuando no se emplea un corrimiento por offset, se encuentran sim\'etricas al cero.
+para determinar estado alto o estado bajo, y cuando no se emplea un corrimiento por offset, se encuentran sim\'etricos al cero.
 
 \begin{figure}[H]
     \centering
@@ -138,6 +138,10 @@ de los valores de comparaci\'on.
     & \Rightarrow V_T = V_{CC_{SAT}} \cdot \frac{R_1}{R_1 + R_2}
 \end{align*}
 
+Es importante observar que se considera que el amplificador operacional no es Rail-To-Rail, dado que se usa que la salida de estado alto o bajo
+est\'a dada por la saturaci\'on de la salida, con lo cual es necesario tener en cuenta este aspecto en el momento del dise\~no para evitar desviaciones pr\'acticas
+por tener en cuenta de forma incorrecta un valor alto o bajo de tensi\'on de salida.
+
 \subsubsection{Voltage Controlled Oscillator}
 En la Fig. \ref{fig:circuito_vco} se puede observar el circuito propuesto para realizar el armado de un VCO utilizando dos amplificadores operacionales
 y un MOSFET. Se realiza un an\'alisis considerando un comportamiento ideal de los amplificadores, y asumiendo que el lector tiene un conocimiento del 
@@ -165,13 +169,15 @@ Sea $V_x$ la tensi\'on pico de la triangular, luego se puede determinar este val
     \label{eq:ecuacion_tensiones_vco}
 \end{equation}
 
+Es importante notar que las desviaciones pr\'acticas estar\'an dadas por el valor de saturaci\'on que se vea en la salida del amplificador.
+
 \paragraph{Integrador controlado por tensi\'on:} Si inicialmente se ignora la presencia del MOSFET y se lo considera una llave ideal, asumiendo que $R_2 = R_3$,
 luego se puede determinar que la corriente $I_{R_1} = \frac{V_i}{2 \cdot R_1}$ se mantiene siempre constante, y cuando la llave est\'e conectada circular\'a por $R_4$ una corriente $I_{R_4} = \frac{V_i}{2 \cdot R_4}$. Dado que el capacitor se carga con una corriente $I_C = I_{R_1} - I_{R_4}$, luego
 se deduce que $R_4 = \frac{R_1}{2}$, dado que de esta forma se cumplir\'a que la llave al estar conectada o no, s\'olo cambia el sentido de la corriente del capacitor,
 pero su magnitud se mantiene constante. De esta forma se integra y calcula la tensi\'on de salida como:
 
 \begin{equation*}
-    i_c(t) = C \cdot \frac{\delta V_c(t)}{\delta t} \Rightarrow \int_0^{t} V_c(t) = \int_0^{t} \frac{i_C(t) \cdot \delta_t}{C}
+    i_c(t) = C \cdot \frac{\delta V_c(t)}{\delta t} \Rightarrow \int_0^{t} \delta V_c(t) = \int_0^{t} \frac{i_C(t) \cdot \delta_t}{C}
 \end{equation*}
 
 \begin{equation}
@@ -193,7 +199,8 @@ del VCO.
 
 \paragraph{Comentarios pr\'acticos:} Para el circuito propuesto se desea utilizar un transistor de tecnolog\'ia MOSFET dado que de esta forma se garantiza que operando en regi\'on lineal,
 la resistencia del canal formado ser\'a peque\~na en comparaci\'on con $R_4$, logrando as\'i que el error por asimetr\'ia de la onda introducido como consecuencia de una asimetr\'ia entre las corrientes
-de carga y descarga, sea peque\~no.
+de carga y descarga, sea peque\~no. Por otro lado, no se utiliza un transistor bipolar de juntura o BJT, porque en su modo de conmutaci\'on introducir\'ia un error por la p\'erdida de tensi\'on de la $VCE_{SAT}$, adem\'as
+de que al emplear fuente de alimentaci\'on partida, la cuadrada tiene su estado bajo con tensi\'on negativa y podr\'ia superar la tensi\'on de ruptura de la juntura base-emisor, quemando el transistor.
 
 \paragraph{Observaciones:} Durante el an\'alisis te\'orico del circuito, se observ\'o que las limitadas funcionalidades que se le dan al generador a dise\~nar podr\'ian se expandidas. En otras palabras,
 podr\'ia emplearse una llave selectora de capacitores m\'ultiplos por 10 entre s\'i, logrando as\'i cambiar el rango de frecuencias a generar. Por otro lado, se podr\'ian colocar etapas de salida de las ondas

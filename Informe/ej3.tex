@@ -229,8 +229,8 @@ descripta anteriormente, empleando un amplificador diferencial con transistores 
 \end{figure}
 
 En forma sintetizada, se puede demostrar que la corriente que circula por la resistencia $R$ sigue un comportamiento en funci\'on de la tensi\'on de entrada que se ve descripto
-por una ecuaci\'on con una funci\'on logar\'itmica. Si se calculan las series de Taylor de dicha funci\'on logar\'itmica, de la funci\'on senoidal de la Ec. \ref{eq:modelo_matematico_conversor},
-luego se puede encontrar que ambas funciones puede, bajo ciertas condiciones, compartir los primeros cinco t\'erminos de tales series, con lo cual se obtendr\'ia una buena aproximaci\'on senoidal. 
+por una ecuaci\'on con una funci\'on logar\'itmica. Si se calculan las series de Taylor de dicha funci\'on logar\'itmica y de la funci\'on inversa del seno,
+luego se puede encontrar que ambas funciones pueden, bajo ciertas condiciones, compartir los primeros cinco t\'erminos de tales series, con lo cual se obtendr\'ia una aproximaci\'on senoidal. 
 Para lograr esto \'ultimo, Meyer dedujo que era necesario que se cumpliera:
 
 \begin{align}
@@ -249,16 +249,17 @@ fueron realizadas bajo ciertos criterios, seg\'un se enumeran a continuaci\'on:
 \begin{itemize}
     \item \textbf{Atenuador:} Las se\~nales triangulares conectadas, si bien deben ser de simetr\'ia $50\%$, su amplitud podr\'a variar con lo cual es necesario una etapa de ajuste para 
     llevar el valor de entrada a los $172mV$ necesario para minimizar la distorsi\'on.
-    \item \textbf{Fuente de corriente compensada:} Se desea utilizar una fuente de corriente simple que entregue la corriente de ambos transistores del par diferencial, en donde se utiliza una compensaci\'on
-    por variaciones de $V_{BE}$ frente a cambios bruscos de temperatura, como mecanismo de protecci\'on para mantener las caracter\'isticas del circuito.
     \item \textbf{Par diferencial:} Como se describi\'o anteriormente, es necesario un par diferencial con el cual, bajo ciertas condiciones, aproximar la respuesta de una se\~nal senoidal utilizando como resistencia $R$
-    del modelo te\'orico de Meyer, un preset que se encuentra para compensar los par\'ametros constructivos de los transistores.
+    del modelo te\'orico de Meyer. El modelo te\'orico de Meyer emplea una resistencia entre emisores de una etapa diferencial con dos fuentes de corrientes que idealmente son iguales, esto implica en la pr\'actica una complejidad y un costo
+    que deben evitarse, con lo cual para ello se utiliza a modo de polarizaci\'on una resistencia $R_8$, que si bien podr\'ia ser una fuente de corriente esto implicar\'ia introducir singularidades en la respuesta en frecuencia que agregar\'ian
+    distorsi\'on no buscada. Las resistencias $R_6$ y $R_7$ son utilizadas para generar el mismo efecto que la $R$ entre emisores del modelo te\'orico de Meyer, no obstante se conectan de esta forma porque es necesario que lo que antes eran dos fuentes de corriente,
+    ahora sea una s\'ola resistencia que provee $2 \cdot I$.
     \item \textbf{Fuente de corriente espejo proporcional:} Se la emplea como carga activa porque as\'i se logra mejorar la relaci\'on sim\'etrica entre corrientes de $Q_1$ y $Q_2$ y crear idealmente un punto de tierra virtual en el colector de $Q_2$,
     lo que permite tener una salida en modo com\'un. Y dado que en el modelo incremental la resistencia de tal fuente es muy grande, las corrientes incrementales se van mayoritariamente por la salida, caracterizando al amplificador
-    por tener una salida de corriente, esto ser\'a aprovechado colocando a la salida una etapa de transimpedancia. Se busca que $R_4 = R_5$, emulando una fuente espejo simple, no obstante la desviaci\'on por diferencia en curvas caracter\'isticas de las junturas
+    por tener una salida de corriente. Se busca que $R_4 = R_5$, emulando una fuente espejo simple, no obstante la desviaci\'on por diferencia en curvas caracter\'isticas de las junturas
     es menor con respecto al par espejo simple.
     \item \textbf{Etapa amplificador de transimpedancia:} Se utiliza un amplificador de transimpedancia aprovechando que la salida del diferencial con carga activa es de corriente, y dado que la salida est\'a montada sobre una tierra virtual,
-    luego no es necesario realizar ning\'un ajuste sobre el nivel de continua u offset. La ganancia del amplificador estar\'a dada por $-R_{10} - R_{11}$ seg\'un el total de la realimentaci\'on.
+    luego no es necesario realizar ning\'un ajuste sobre el nivel de continua u offset. La ganancia del amplificador estar\'a dada por $-R_{10}$.
 \end{itemize}
 
 \begin{figure}[H]
@@ -268,13 +269,100 @@ fueron realizadas bajo ciertos criterios, seg\'un se enumeran a continuaci\'on:
     \label{fig:circuito_conversor_propuesto}
 \end{figure}
 
+\paragraph{Comentarios pr\'acticos:} El an\'alisis del funcionamiento del par diferencial asume condiciones ideales y que los $Q_1$ y $Q_2$ son transistores iguales. No obstante,
+en la realidad podr\'ia suceder que no lo sean, y a pesar de que ambos transistores tienen mismas mallas de entrada, puede suceder que dado las diferencias entre sus curvas de polarizaci\'on,
+luego sus corrientes no sean iguales. Esto producir\'ia una asimetr\'ia en el par diferencia que provocar\'ia un corrimiento en la salida. Para solucionar esto en caso de que en la pr\'actica se presenten
+dispersiones grandes, se suele utilizar un preset para compensar esa desigualdad. No obstante, con el objetivo de minimizar la cantidad de presets para calibraci\'on usados, se propone el siguiente circuito
+como alternativa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{../EJ3/Recursos/compensacion_activa.png}
+    \caption{Compensaci\'on activa de diferencias entre $Q_1$ y $Q_2$}
+    \label{fig:compensacion_activa}
+\end{figure}
+
+El circuito de la Fig. \ref{fig:compensacion_activa} es una propuesta para compensar de forma activa las diferencias producidas por las diferencias
+entre las junturas de ambos transistores $Q_1$ y $Q_2$. El objetivo es, asumiendo que $R_6 = R_7$, luego idealmente el amplificador operacional mantiene la diferencia
+de tensi\'on entre las ca\'idas en las resistencias nulo, para lo cual realimenta una tensi\'on de base en el $Q_2$ desplazando su curva caracter\'istica hasta que se encuentre
+coincidente con la de $Q_1$. Dado que esta compensaci\'on activa no debe interferir en el circuito incremental, se utiliza un capacitor de gran valor de capacidad para que s\'olo
+opere en frecuencias muy bajas o continua.
+
 \subsection{Dise\~no de VCO}
 
 \subsubsection{Especificaciones y etapas}
+Se desea dise\~nar un oscilador controlado por tensi\'on cuya salida sea senoidal, y que para el rango de tensiones de 0V a 5V, la salida
+var\'ie de 1kHz a 10kHz. A partir de esto, se deduce que es necesario diagramar un sistema como se ilustra en la Fig. \ref{fig:diagrama_en_bloques}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{../EJ3/Recursos/diagrama_en_bloques.png}
+    \caption{Diagrama en bloques del sistema a dise\~nar}
+    \label{fig:diagrama_en_bloques}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Acondicionamiento lineal:} En principio es necesario una etapa para adaptar el rango lineal de tensiones de entrada comprendidas entre
+    0 - 5V, a un rango que sea adecuado seg\'un lo necesite el oscilador controlado por tensi\'on, ya que el esquema a utilizar no oscila para 0V de entrada.
+    \item \textbf{Oscilador Controlado por Tensi\'on:} Utilizando esta etapa, para un rango deseado de tensiones, se generar\'an ondas cuadradas y triangulares
+    que cumplan con la frecuencias deseadas, y en principio no existe limitante alguna sobre las tensiones de las se\~nales a utilizar.
+    \item \textbf{Conversor Triangular a Senoidal:} Se utiliza esta etapa para convertir la onda triangular del oscilador en una se\~nal senoidal.
+\end{itemize}
 
 \subsubsection{C\'alculo de componentes}
+En una primera aproximaci\'on del dise\~no, se busca que el oscilador controlado por tensi\'on genere una frecuencia $f = 1kHz$ para una tensi\'on de entrada
+arbitraria que sea mucho mayor que el piso de ruido, y no demasiado grande para garantizar que al multiplicar por 10 esa tensi\'on, la frecuencia luego sea $f = 10kHz$.
+Luego, la etapa de acondicionamiento lineal debe ajustar el rango de entrada al rango esperado por el VCO, y finalmente si la salida del oscilador tiene una amplitud mucho mayor
+que el piso de ruido, en el conversor triangular a senoidal se aten\'ua y produce una senoidal de tensi\'on pico ajustable.
+
+El problema de esta primera aproximaci\'on es que, 
+puede suceder que para distintas frecuencias por los consumos de corriente y el Slew Rate, la tensi\'on de saturaci\'on no se mantenga invariante, produciendo un error 
+que puede ser proporcional con la frecuencia de operaci\'on de alguna forma. Entonces, si se dise\~na primero siguiendo la aproximaci\'on antes explicada, se puede encontrar que en la pr\'actica
+las desviaciones para la m\'inima frecuencia son menores, pero para la m\'axima frecuencia llegan a ser del $15 \%$, con lo cual tomando dimensi\'on de este error por las limitaciones din\'amicas del amplificador 
+operacional, se utiliza una relaci\'on de acondicionamiento de la se\~nal que compense el error por frecuencias.
+
+
+Es importanta aclarar, que se utilizar\'a como amplificador operacional el TL082, dado que tiene un buen ancho de banda y slew rate, pero adem\'as se lo puede encontrar disponible en tecnlogo\'ia de montaje superficial.
+
+\paragraph{Acondicionamiento Lineal:} Se dise\~na el circuito de la Fig. \ref{fig:circuito_acondicionamiento_lineal}, que en principio deber\'ia estar fijado para conseguir adaptar el rango 0 - 5V a
+un rango de 1 - 10V, pero que para compensar el error real por las limitaciones ya mencionadas debe adaptar al rango 1.05 - 11.80V. Si $V_i = 0V \Rightarrow V_o = V_{OFF} = 1.05V$, entonces utilizando resistencias $R_1 = 120k \Omega$ y $R_2 = 9.1k \Omega$ se 
+obtiene la tensi\'on de offset. Por otro lado, cuando $m = \frac{11.8V - 1.05V}{5V - 0V} = \frac{R_4}{R_5}$, entonces utilizando resistencias $R_4 = 100k \Omega$ y $R_5 = 47k \Omega$ se satisface la pendiente de tal adaptaci\'on.
+
+\paragraph{Oscilador Controlador por Tensi\'on:} Se dise\~na el circuito de la Fig. \ref{fig:circuito_vco} para cumplir con el criterio de que dada una $V_i = 1V \Rightarrow f = 1kHz$. En primer lugar, por tomar un valor arbitrario,
+se decide utilizar una triangular de valor pico $V_x = 5V$, con lo cual asumiendo que $V_{CC_{SAT}} = 12.5V$ siempre que la alimentaci\'on sea $V_{CC} = -V_{EE} = 15V$, se utilizan $R_6 = 1k \Omega $ y $R_7 = 1.5k \Omega $. Luego de forma arbitraria, $R_2 = R_3 = 1k \Omega$, dado que lo importante
+es que cumplan la relaci\'on de igualdad. Finalmente, empleando la Ec. \ref{eq:ecuacion_caracteristica_vco}, para conseguir tal frecuencia se propone $C = 8.2 nF$ y $R_1 = 3k \Omega \Rightarrow R_4 = 1.5k \Omega$.
+
+\paragraph{Conversor triangular a senoidal:} Se dise\~na el circuito de la Fig. \ref{fig:circuito_conversor_propuesto}. Utilizando $R_1 = 2.4k \Omega$, $R_2 = 50k \Omega$ y $R_3 = 1k \Omega$, que provienen de plantear un rango de atenuaci\'on
+de la se\~nal de entrada que se encuentra entre el $1\%$ y el $30\%$. Luego, para los pares NPN se usa el BC547 y para los pares PNP se usa el BC557, y $R_9 = 1k \Omega$ para cumplir con las condiciones de simetr\'ia del par diferencial.
+El circuito se arm\'o de esta manera en la pr\'actica para determinar si hab\'ia alguna disparidad entre las corrientes de ambos transistores y si, en ese caso, era necesaria la compensaci\'on activa propuesto. Finalmente,
+se encontr\'o que tal compensaci\'on no era necesaria porque el par empleado coincid\'ia lo suficiente.
+
+Para el dise\~no del par diferencial se inicia planteando que $R_6 = R_7 = 47 \Omega$, luego como son transistores con un $hFE >> 1$ entonces se puede despreciar las corrientes de base,
+asumiendo as\'i en la malla de polarizaci\'on que:
+
+\begin{align*}
+    & V_{EE} + R_8 \cdot 2 \cdot I + I \cdot R_7 + V_{BE} = 0 \\
+    & \Rightarrow R_8 = \frac{-V_{EE} - V_{BE} - R_7 \cdot I}{2 \cdot I}
+\end{align*}
+
+Luego, con una resistencia de $47 \Omega$, para cumplir la relaci\'on deducida por Meyer, es necesario una corriente de $I = 664.89 \mu A$, con lo cual
+de la ecuaci\'on anterior se deduce que $R_8 = 11k \Omega$. Finalmente, en el par espejo se utilizan $R_4 = R_5 = 3.3 k \Omega$ para tener una corriente igual en cada rama,
+y no tener mucha ca\'ida de tensi\'on que produzca la saturaci\'on de alg\'un transistor. La $R_{10}$ es un preset variable de $50 k \Omega$ para ajustar la tensi\'on pico de la senoidal
+de salida.
 
 \subsubsection{Simulaci\'on y verificaci\'on}
+Realizando la simulaci\'on del circuito en LTSpice, se pudo verificar el correcto funcionamiento del circuito total tal como es esperado,
+en las Figs. \ref{fig:verificacion} se ilustran el acondicionamiento del rango de tensiones de entrada y una oscilaci\'on del oscilador y el conversor.
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c c}
+        \includegraphics[scale=0.35]{../EJ3/Recursos/verificacion_acondicionamiento.png} &
+        \includegraphics[scale=0.4]{../EJ3/Recursos/verificacion_vco.png}
+    \end{tabular}
+    \caption{Verificaci\'on del acondicionamiento y oscilaci\'on}
+    \label{fig:verificacion}
+\end{figure}
 
 \subsection{Resultados}
 

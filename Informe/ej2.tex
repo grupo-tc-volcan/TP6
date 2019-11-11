@@ -42,7 +42,7 @@ El PLL est\'a formado por tres bloques fundamentales para su funcionamiento: un 
 		\end{cases}
 	\end{equation}
 	
-	Siendo, en las ecuaciones anteriores, $\omega_{vco}$ la frecuencia a la salida del VCO, $\omega_0$ la frecuencia de la señal que entra al VCO y $K_{vco}$ la constante de proporcionalidad que introduce el VCO.
+	Siendo, en las ecuaciones anteriores, $\omega_{vco}$ la frecuencia a la salida del VCO, $\omega_0$ la frecuencia de la señal que entra al VCO, denominada "free running frequency" y $K_{vco}$ la constante de proporcionalidad que introduce el VCO.
 	
 	
 \subsection{Respuesta en frecuencia}
@@ -71,6 +71,7 @@ Luego,
 	\frac{V_{out}}{\phi_{in}} = \frac{sK_{\phi}F(s)}{s+K_{\phi}K_{vco}F(s)}\\ \\
 	\frac{V_{out}}{\omega_{in}}=\frac{V_{out}}{\phi_{in}s} = \frac{K_{\phi}F(s)}{s+K_{\phi}K_{vco}F(s)}
 	\end{cases}
+	\label{transf}
 \end{equation}
 
 Y entonces se puede escribir $G(s)$ como:
@@ -100,6 +101,8 @@ Por lo tanto:
 
 La interpretaci\'on del resultado en la ecuaci\'on \ref{futuro} es que una vez alcanzado el comportamiento permanente del circuito, la fase de la señal de salida del VCO sigue a aquella de la señal de entrada y a esto se debe lo mencionado al inicio sobre que estas señales presentan la misma frecuencia.
 
+	\subsubsection{Transferencia en condici\'on de enganche}
+
 \subsection{Respuesta al escal\'on}
 
 	\subsubsection{Factor de calidad a partir del overshoot}
@@ -108,17 +111,46 @@ La interpretaci\'on del resultado en la ecuaci\'on \ref{futuro} es que una vez a
 
 \subsection{Rango de captura y de enganche}
 
-	\subsubsection{Rango de captura}
+\begin{figure}[H] %!ht
+	\centering
+	\includegraphics[width=12cm,height=12cm,keepaspectratio]{../EJ2/imagenes/rango.png}
+	\caption{Rangos de captura y de enganche.}
+	\label{rango}
+\end{figure}
 
-	\subsubsection{Ranto de enganche}
+	\paragraph{Rango de captura:} Es el rango de frecuencias en el que la señal de entrada debe estar para para engancharse. El rango de captura es $2f_c$, siendo $f_c$ la frecuencia de captura, medida desde una frecuencia central $f_0$. Esto se ve en la figura \ref{rango}.
 
-\subsection{Respuesta transitoria ante distintos filtros}
+	\paragraph{Rango de enganche:} Es el rango de frecuencias para el cual la señal a la salida del VCO queda enganchada luego de haver pasado por el rango de captura. El rango de enganche es $2f_L$, siendo $f_L$ la freciencia de enganche, medida respecto a la frecuencia $f_0$. Esto se ve en la figura \ref{rango}.
+	
+	El rango de captura es menor al rango de enganche, ya que para quedar enganchada la señal luego de pasar por el VCO, debe haber pasado previamente por el rango de captura. Por lo tanto $2f_C<2f_L$.
 
-	\subsubsection{F(s) = 1}
+\subsection{Respuesta transitoria ante distintos filtros de lazo}
+
+	\subsubsection{Sin filtro: F(s) = 1 }
+	Haciendo $F(s) = 1$ en la expresi\'on \ref{transf}, se obtiene:
+	
+\begin{equation}
+\begin{cases}
+\frac{V_{out}}{\phi_{in}} = \frac{sK_{\phi}}{s+K_{\phi}K_{vco}}\\ \\
+\frac{V_{out}}{\omega_{in}}=\frac{V_{out}}{\phi_{in}s} = \frac{K_{\phi}}{s+K_{\phi}K_{vco}}
+\end{cases}
+\label{transf1}
+\end{equation}
+
+Considerando la segunda espresi\'on de \ref{transf1}, se observa que es de la forma de un filtro pasabajos. La variable de entrada es$\omega_{in}$. La respuesta de esta expresi\'on representa una tensi\'on que corresponde a haber modulado en frecuencia una onda portadora entrante.
+Se mencionan ciertas caracter\'isticas del comportamiento del circuito sin la presencia del filtro F(s). Dado que del comparador sale una señal con una frecuencia de la suma de las de sus entradas y otra con la resta, no habr\'a un filtro luego del comparador que permita el paso de solo una de ellas. Tambi\'en pueden aparecer señales de interferencia no pertenicientes a la banda deseada. El PLL con este tipo de filtro tiene un proceso de captura m\'as lento, un menor rango de captura y una respuesta sobre amortiguada. Sin embargo, rechaza m\'as aquellas perturbaciones en la frecuencia que entra.
 		
 	\subsubsection{Filtro pasa bajos}
 	
-	$F(s) = \frac{1}{\frac{s}{\omega_p} + 1}$
+	Teniendo un filtro pasa bajos de la forma $F(s) = \frac{1}{\frac{s}{\omega_p} + 1}$, reemplazando esto en la expresi\'on \ref{transf} se obtiene:
+	
+	\begin{equation}
+	\begin{cases}
+	\frac{V_{out}}{\phi_{in}} = \frac{1}{K_{phi}}\cdot \frac{s}{\frac{s^2}{\omega_p K_{vco}}+\frac{s}{K_{vco}} + 1}\\ \\
+	\frac{V_{out}}{\omega_{in}} (s)=\frac{V_{out}}{\phi_{in}s} = \frac{1}{K_{phi}}\cdot \frac{1}{\frac{s^2}{\omega_p K_{vco}}+\frac{s}{K_{vco}} + 1}
+	\end{cases}
+	\label{transf2}
+	\end{equation}
 	
 	\subsubsection{Filtro con un polo y un cero}
 	$F(s) = \frac{\frac{s}{\omega_z} + 1}{\frac{s}{\omega_p} + 1}$

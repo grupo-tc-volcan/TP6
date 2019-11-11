@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.29)  11 NOV 2019 00:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.29)  11 NOV 2019 12:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -808,19 +808,24 @@ LaTeX Info: Redefining \% on input line 1.
 (./ej2.tex
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
 ine 6.
-<../EJ2/imagenes/PLL.png, id=169, 532.99126pt x 141.52875pt>
+<../EJ2/imagenes/PLL.png, id=164, 532.99126pt x 141.52875pt>
 File: ../EJ2/imagenes/PLL.png Graphic file (type png)
 <use ../EJ2/imagenes/PLL.png>
 Package pdftex.def Info: ../EJ2/imagenes/PLL.png  used on input line 14.
 (pdftex.def)             Requested size: 341.43855pt x 90.66446pt.
  [4 <../EJ2/imagenes/PLL.png>]
-<../EJ2/imagenes/transf.png, id=188, 532.99126pt x 181.67876pt>
+<../EJ2/imagenes/transf.png, id=183, 532.99126pt x 181.67876pt>
 File: ../EJ2/imagenes/transf.png Graphic file (type png)
 <use ../EJ2/imagenes/transf.png>
 Package pdftex.def Info: ../EJ2/imagenes/transf.png  used on input line 54.
 (pdftex.def)             Requested size: 341.43855pt x 116.38489pt.
- [5 <../EJ2/imagenes/transf.png>])
-[6] (./ej3.tex) [7]
+<../EJ2/imagenes/rango.png, id=186, 677.53125pt x 456.70625pt>
+File: ../EJ2/imagenes/rango.png Graphic file (type png)
+<use ../EJ2/imagenes/rango.png>
+Package pdftex.def Info: ../EJ2/imagenes/rango.png  used on input line 116.
+(pdftex.def)             Requested size: 341.4424pt x 230.15747pt.
+ [5 <../EJ2/imagenes/transf.png>]
+[6 <../EJ2/imagenes/rango.png>]) [7] (./ej3.tex) [8]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 34.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 34.
  (./informe.aux
@@ -830,13 +835,13 @@ LaTeX Info: Redefining \% on input line 23.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 34.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 34.
 Package rerunfilecheck Info: File `informe.out' has not changed.
-(rerunfilecheck)             Checksum: 2D8BBC92BE3C47B42F33FF57495694D7;1753.
+(rerunfilecheck)             Checksum: 3C0956B7C2877B211564D6AFA773E083;1722.
  ) 
 Here is how much of TeX's memory you used:
- 19132 strings out of 494060
- 359681 string characters out of 6163035
- 452462 words of memory out of 5000000
- 22432 multiletter control sequences out of 15000+600000
+ 19151 strings out of 494060
+ 359939 string characters out of 6163035
+ 452661 words of memory out of 5000000
+ 22445 multiletter control sequences out of 15000+600000
  11301 words of font info for 41 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  63i,9n,81p,796b,974s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -851,15 +856,16 @@ public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2019basic/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019basic/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2019basic/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2019basic/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2019basic/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2019basic/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on informe.pdf (7 pages, 201986 bytes).
+fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2019basic/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2019basic/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2019basic/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019basic/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019basic
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on informe.pdf (8 pages, 342687 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 230 compressed objects within 3 object streams
- 45 named destinations out of 1000 (max. 500000)
- 303 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 293 PDF objects out of 1000 (max. 8388607)
+ 242 compressed objects within 3 object streams
+ 50 named destinations out of 1000 (max. 500000)
+ 300 words of extra memory for PDF output out of 10000 (max. 10000000)
 

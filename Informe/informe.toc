@@ -7,18 +7,18 @@
 \contentsline {subsubsection}{\numberline {2.2.2}Filtro pasabajos}{4}{subsubsection.2.2.2}% 
 \contentsline {subsubsection}{\numberline {2.2.3}VCO: Voltage Controlled Oscillator}{4}{subsubsection.2.2.3}% 
 \contentsline {subsection}{\numberline {2.3}Respuesta en frecuencia}{5}{subsection.2.3}% 
-\contentsline {subsection}{\numberline {2.4}Respuesta al escal\'on}{5}{subsection.2.4}% 
-\contentsline {subsubsection}{\numberline {2.4.1}Factor de calidad a partir del overshoot}{5}{subsubsection.2.4.1}% 
-\contentsline {subsubsection}{\numberline {2.4.2}Tiempo de establecimiento}{5}{subsubsection.2.4.2}% 
-\contentsline {subsection}{\numberline {2.5}Rango de captura y de enganche}{5}{subsection.2.5}% 
-\contentsline {subsubsection}{\numberline {2.5.1}Rango de captura}{5}{subsubsection.2.5.1}% 
-\contentsline {subsubsection}{\numberline {2.5.2}Ranto de enganche}{5}{subsubsection.2.5.2}% 
-\contentsline {subsection}{\numberline {2.6}Respuesta transitoria ante distintos filtros}{5}{subsection.2.6}% 
-\contentsline {subsubsection}{\numberline {2.6.1}F(s) = 1}{5}{subsubsection.2.6.1}% 
-\contentsline {subsubsection}{\numberline {2.6.2}Filtro pasa bajos}{5}{subsubsection.2.6.2}% 
-\contentsline {subsubsection}{\numberline {2.6.3}Filtro con un polo y un cero}{5}{subsubsection.2.6.3}% 
-\contentsline {subsection}{\numberline {2.7}Implementaciones con PLL}{5}{subsection.2.7}% 
-\contentsline {subsubsection}{\numberline {2.7.1}Demodulador FM }{5}{subsubsection.2.7.1}% 
-\contentsline {subsubsection}{\numberline {2.7.2}Multiplicador de frecuencia}{5}{subsubsection.2.7.2}% 
-\contentsline {subsection}{\numberline {2.8}Conclusiones}{5}{subsection.2.8}% 
-\contentsline {section}{\numberline {3}VCO: Voltage Controlled Oscillator}{6}{section.3}% 
+\contentsline {subsection}{\numberline {2.4}Respuesta al escal\'on}{6}{subsection.2.4}% 
+\contentsline {subsubsection}{\numberline {2.4.1}Factor de calidad a partir del overshoot}{6}{subsubsection.2.4.1}% 
+\contentsline {subsubsection}{\numberline {2.4.2}Tiempo de establecimiento}{6}{subsubsection.2.4.2}% 
+\contentsline {subsection}{\numberline {2.5}Rango de captura y de enganche}{6}{subsection.2.5}% 
+\contentsline {subsubsection}{\numberline {2.5.1}Rango de captura}{6}{subsubsection.2.5.1}% 
+\contentsline {subsubsection}{\numberline {2.5.2}Ranto de enganche}{6}{subsubsection.2.5.2}% 
+\contentsline {subsection}{\numberline {2.6}Respuesta transitoria ante distintos filtros}{6}{subsection.2.6}% 
+\contentsline {subsubsection}{\numberline {2.6.1}F(s) = 1}{6}{subsubsection.2.6.1}% 
+\contentsline {subsubsection}{\numberline {2.6.2}Filtro pasa bajos}{6}{subsubsection.2.6.2}% 
+\contentsline {subsubsection}{\numberline {2.6.3}Filtro con un polo y un cero}{6}{subsubsection.2.6.3}% 
+\contentsline {subsection}{\numberline {2.7}Implementaciones con PLL}{6}{subsection.2.7}% 
+\contentsline {subsubsection}{\numberline {2.7.1}Demodulador FM }{6}{subsubsection.2.7.1}% 
+\contentsline {subsubsection}{\numberline {2.7.2}Multiplicador de frecuencia}{6}{subsubsection.2.7.2}% 
+\contentsline {subsection}{\numberline {2.8}Conclusiones}{6}{subsection.2.8}% 
+\contentsline {section}{\numberline {3}VCO: Voltage Controlled Oscillator}{7}{section.3}% 

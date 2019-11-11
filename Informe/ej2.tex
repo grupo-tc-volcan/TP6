@@ -2,7 +2,8 @@
 
 \subsection{Introducci\'on}
 
-Un Phase Locked-Loop, mejor conocido como PLL, es un sistema de control cuya se\~nal de salida tiene la misma frecuencia que la se\~nal de entrada y sigue sus variaciones en frecuencia dentro de un rango acotado. El PLL es muy usado en sistemas de comunicaciones, ya que sus principales aplicaciones son de demodulador de FM o PM y como seguidor o sincronizador de se\~nales que temporalmente var\'ian su frecuencia. A continuaci\'on se analizar\'an ciertos comportamientos del PLL y su aplicaci\'on como demodulador de FM y como multiplicador de frecuencia.
+Un Phase Locked-Loop, mejor conocido como PLL, es un sistema de control cuya se\~nal de salida tiene la misma frecuencia que la se\~nal de entrada y sigue sus variaciones en frecuencia dentro de un rango acotado. El PLL es muy usado en sistemas de comunicaciones, ya que sus principales aplicaciones son de demodulador de FM o PM y como seguidor o sincronizador de se\~nales que temporalmente var\'ian su frecuencia. A continuaci\'on se analizar\'an ciertos comportamientos del PLL y su aplicaci\'on como demodulador de FM y como multiplicador de frecuencia. Para realizar el trabajo se utilizar\'a el integrado CD4046 \footnote{Hoja de datos del integrado CD4046:}.
+\todo{agregar datasheet}
 
 \subsection{Diagrama en bloques del PLL}
 
@@ -25,13 +26,79 @@ El PLL est\'a formado por tres bloques fundamentales para su funcionamiento: un 
 		\end{cases}
 	\end{equation}
 	
+	Se mencion\'o que hay distintas formas de implementar un comparador. El integrado que se emplea en este trabajo es el CD4046 y contiene dos tipos de comparadores de fase diferentes (tipo 1 y tipo 2) 
+	\todo{explicar los comparadores del integrado usado}
+	
 	\subsubsection{Filtro pasabajos}
 	Este filtro se emplea para que el lazo sea estable. Tambi\'en permite un proceso de captura de frecuencias m\'as rapido, un rango de captura mayor y la respuesta del circuito no es sobre amortiguada. Adem\'as, en caso de que se pierda el enganche por interferencias durante el transitorio, el filtro otorga una memoria en el lazo. Por otro lado, la presencia del filtro brinda una ventaja en la demodulaci\'on. La señal que sale del comparador de fase ingresar\'a luego al VCO. Si esta señal tiene un riple, al demodularla puede producir picos no correspondientes a la señal que inicialmente fue modulada.
 		
 	\subsubsection{VCO: Voltage Controlled Oscillator}
-	El VCO es un integrador que genera una frecuencia proporcional a la señal de entrada.
+	El VCO es un integrador que genera una señal cuya frecuencia es proporcional a la tensi\'on de la señal aplicada en su entrada:
+	
+	\begin{equation}
+		\begin{cases}
+			\omega_{vco} =\omega_0 + K_{vco} \cdot V_2\\
+			\omega_{vco} = \frac{d \phi_{vco}}{dt} \implies \phi_{vco} = \int \omega_{vco} dt \implies \phi_{vco}(s) = \frac{1}{s} \cdot \omega_{vco}(s)
+		\end{cases}
+	\end{equation}
+	
+	Siendo, en las ecuaciones anteriores, $\omega_{vco}$ la frecuencia a la salida del VCO, $\omega_0$ la frecuencia de la señal que entra al VCO y $K_{vco}$ la constante de proporcionalidad que introduce el VCO.
+	
 	
 \subsection{Respuesta en frecuencia}
+
+Se respresenta ahora el diagrama en bloques indicando matem\'aticamente la influencia de cada uno, para mostrar a partir de este la funci\'on transferencia del PLL.
+
+\begin{figure}[H] %!ht
+	\centering
+	\includegraphics[width=12cm,height=12cm,keepaspectratio]{../EJ2/imagenes/transf.png}
+	\caption{Diagrama en bloques del PLL con sus funciones matem\'aticas.}
+	\label{pll2}
+\end{figure}
+
+A partir del diagrama en bloques de la figura \ref{pll2}, se hace el siguiente desarrollo matem\'atico. Se parte de:
+\begin{equation}
+	\begin{cases}
+		H(s) = \frac{G(s)}{1+G(s)}\\
+		G(s) = \frac{K_{\phi}F(s)K_{vco}}{s}
+	\end{cases}
+\end{equation}
+
+Luego, 
+
+\begin{equation}
+\begin{cases}
+	\frac{V_{out}}{\phi_{in}} = \frac{sK_{\phi}F(s)}{s+K_{\phi}K_{vco}F(s)}\\ \\
+	\frac{V_{out}}{\omega_{in}}=\frac{V_{out}}{\phi_{in}s} = \frac{K_{\phi}F(s)}{s+K_{\phi}K_{vco}F(s)}
+	\end{cases}
+\end{equation}
+
+Y entonces se puede escribir $G(s)$ como:
+
+\begin{equation}
+	G(s) = \frac{K_{vco}F(s)}{s}
+\end{equation}
+	
+Adem\'as:
+
+\begin{equation}
+	\phi_{vco} = \frac{G(s)}{1+G(s)}\phi_{in}(s)
+\end{equation}
+
+Y por el teorema del valor final, sabemos que $\lim_{t\rightarrow\infty}{x(t)} = \lim_{s\rightarrow0}{sX(s)}$:
+
+\begin{equation}
+	\lim_{s\rightarrow0}{s\phi_{vco}(s)} = \lim_{s\rightarrow0}{s\left( \frac{G(s)}{1 + G(s)}\phi_{in}(s) \right)} = \phi_{in} (s)
+\end{equation}
+
+Por lo tanto:
+
+\begin{equation}
+	\phi_{vco}(t) \approx \phi_{in}(t)|_{t\to\infty} 
+	\label{futuro}
+\end{equation}
+
+La interpretaci\'on del resultado en la ecuaci\'on \ref{futuro} es que una vez alcanzado el comportamiento permanente del circuito, la fase de la señal de salida del VCO sigue a aquella de la señal de entrada y a esto se debe lo mencionado al inicio sobre que estas señales presentan la misma frecuencia.
 
 \subsection{Respuesta al escal\'on}
 

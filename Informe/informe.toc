@@ -14,10 +14,10 @@
 \contentsline {subsection}{\numberline {2.5}Rango de captura y de enganche}{6}{subsection.2.5}% 
 \contentsline {paragraph}{Rango de captura:}{6}{section*.4}% 
 \contentsline {paragraph}{Rango de enganche:}{6}{section*.5}% 
-\contentsline {subsection}{\numberline {2.6}Respuesta transitoria ante distintos filtros de lazo}{6}{subsection.2.6}% 
-\contentsline {subsubsection}{\numberline {2.6.1}Sin filtro: F(s) = 1 }{6}{subsubsection.2.6.1}% 
-\contentsline {subsubsection}{\numberline {2.6.2}Filtro pasa bajos}{7}{subsubsection.2.6.2}% 
-\contentsline {subsubsection}{\numberline {2.6.3}Filtro con un polo y un cero}{7}{subsubsection.2.6.3}% 
+\contentsline {subsection}{\numberline {2.6}Respuesta transitoria ante distintos filtros de lazo}{7}{subsection.2.6}% 
+\contentsline {subsubsection}{\numberline {2.6.1}Sin filtro: F(s) = 1 }{7}{subsubsection.2.6.1}% 
+\contentsline {subsubsection}{\numberline {2.6.2}Filtro pasa bajos: RC}{7}{subsubsection.2.6.2}% 
+\contentsline {subsubsection}{\numberline {2.6.3}Filtro con un polo y un cero: RRC}{7}{subsubsection.2.6.3}% 
 \contentsline {subsection}{\numberline {2.7}Implementaciones con PLL}{7}{subsection.2.7}% 
 \contentsline {subsubsection}{\numberline {2.7.1}Demodulador FM }{7}{subsubsection.2.7.1}% 
 \contentsline {subsubsection}{\numberline {2.7.2}Multiplicador de frecuencia}{7}{subsubsection.2.7.2}% 

@@ -13,8 +13,8 @@
 \BOOKMARK [2][-]{subsection.2.5}{Rango de captura y de enganche}{section.2}% 13
 \BOOKMARK [2][-]{subsection.2.6}{Respuesta transitoria ante distintos filtros de lazo}{section.2}% 14
 \BOOKMARK [3][-]{subsubsection.2.6.1}{Sin filtro: F\(s\) = 1 }{subsection.2.6}% 15
-\BOOKMARK [3][-]{subsubsection.2.6.2}{Filtro pasa bajos}{subsection.2.6}% 16
-\BOOKMARK [3][-]{subsubsection.2.6.3}{Filtro con un polo y un cero}{subsection.2.6}% 17
+\BOOKMARK [3][-]{subsubsection.2.6.2}{Filtro pasa bajos: RC}{subsection.2.6}% 16
+\BOOKMARK [3][-]{subsubsection.2.6.3}{Filtro con un polo y un cero: RRC}{subsection.2.6}% 17
 \BOOKMARK [2][-]{subsection.2.7}{Implementaciones con PLL}{section.2}% 18
 \BOOKMARK [3][-]{subsubsection.2.7.1}{Demodulador FM }{subsection.2.7}% 19
 \BOOKMARK [3][-]{subsubsection.2.7.2}{Multiplicador de frecuencia}{subsection.2.7}% 20

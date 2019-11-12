@@ -104,6 +104,7 @@ La interpretaci\'on del resultado en la ecuaci\'on \ref{futuro} es que una vez a
 	\subsubsection{Transferencia en condici\'on de enganche}
 
 \subsection{Respuesta al escal\'on}
+	En el caso del PLL, se ha observado que estudiar la funci\'on transferencia del circuito consiste en analizar qu\'e sucede con la tensi\'on de salida en funci\'on de la frecuencia de entrada. Debido a esto, estudiar la respuesta al escal\'on es ver el comportamiento de la tensi\'on de salida a partir de un "escal\'on en frecuencia". Es decir, el escal\'on es un cambio abrupto entre señales con dos frecuencias separadas por un intervalo de valores. Es importante remarcar que ambas frecuencias deben estar dentro del rango de captura por que de lo contrario no podr\'ian engancharse y la respuesta a este cambio de frecuencias no podr\'ia ser medida. Para medir esto, se configur\'o una señal en el generador de señales a una frecuencia dada. Luego se modific\'o el valor de la frecuencia utilizando los botones del instrumento ya que se deseaba obtener un cambio brusco de frecuencias, y se emple\'o el osciloscopio en modo Single para poder ver la respuesta del circuito frente a este cambio.
 
 	\subsubsection{Factor de calidad a partir del overshoot}
 
@@ -139,8 +140,9 @@ La interpretaci\'on del resultado en la ecuaci\'on \ref{futuro} es que una vez a
 
 Considerando la segunda espresi\'on de \ref{transf1}, se observa que es de la forma de un filtro pasabajos. La variable de entrada es$\omega_{in}$. La respuesta de esta expresi\'on representa una tensi\'on que corresponde a haber modulado en frecuencia una onda portadora entrante.
 Se mencionan ciertas caracter\'isticas del comportamiento del circuito sin la presencia del filtro F(s). Dado que del comparador sale una señal con una frecuencia de la suma de las de sus entradas y otra con la resta, no habr\'a un filtro luego del comparador que permita el paso de solo una de ellas. Tambi\'en pueden aparecer señales de interferencia no pertenicientes a la banda deseada. El PLL con este tipo de filtro tiene un proceso de captura m\'as lento, un menor rango de captura y una respuesta sobre amortiguada. Sin embargo, rechaza m\'as aquellas perturbaciones en la frecuencia que entra.
+Por otro lado, el VCO genera una señal cuya frecuencia var\'ia en funci\'on de un valor de tensi\'on cont\'inua a su entrada. Sin la presencia de ning\'un filtro a la entrada del VCO, al mismo le llega una señal que no es cont\'inua, ya que proviene directamente de la salida del comparador. Sin embargo, el VCO debe recibir tensi\'on cont\'inua a su entrada para funcionar correctamente. Si la tensi\'on a su entrada no es cont\'inua, el VCO deber\'a tratar de seguir a la señal que le llega. Debido a que su respuesta no es instant\'anea, no logra seguir su tensi\'on de un lado a otro y por lo tanto esto resulta en que el VCO responde a una señal pr\'acticamente plana, variando su valor cercanamente al valor medio de su señal de entrada. Lo que en realidad deber\'a suceder es que a la entrada del VCO llegue una tensi\'on cont\'inua. Esto puede lograrse colocando un integrador antes del VCO de forma que la señal de entrada al mismo sea el valor medio (un valor de tensi\'on constante) de la señal de salida del comparador. Para lograrlo, se agrega un filtro F(s), como los mencionados a continuaci\'on.
 		
-	\subsubsection{Filtro pasa bajos}
+	\subsubsection{Filtro pasa bajos: RC}
 	
 	Teniendo un filtro pasa bajos de la forma $F(s) = \frac{1}{\frac{s}{\omega_p} + 1}$, reemplazando esto en la expresi\'on \ref{transf} se obtiene:
 	
@@ -152,8 +154,13 @@ Se mencionan ciertas caracter\'isticas del comportamiento del circuito sin la pr
 	\label{transf2}
 	\end{equation}
 	
-	\subsubsection{Filtro con un polo y un cero}
+	Este tipo de filtro hace de integrador para la señal que luego ingresa al VCO, de forma que a su salida se obtiene una señal cont\'inua que corresponde al valor medio de la señal que le ingresa. El filtro tiene una \'unica singularidad, y se trata de un polo. Debido a la presencia de este polo, y dependiendo del Q, puede llegar a haber un sobrepico hacia arriba cerca de la frecuencia de corte del filtro.
+	\todo{Ver que decir, lo de cuanto mas a la izq o mas a la derecha esta el poloj}
+	
+	\subsubsection{Filtro con un polo y un cero: RRC}
 	$F(s) = \frac{\frac{s}{\omega_z} + 1}{\frac{s}{\omega_p} + 1}$
+	
+	La ventaja de usar un filtro de este tipo es que al tener un polo y un cero, se puede ubicar el cero cerca del polo de forma que el sobrepico mencionado antes no est\'e m\'as.
 
 \subsection{Implementaciones con PLL}
 

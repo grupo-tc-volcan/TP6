@@ -366,8 +366,113 @@ en las Figs. \ref{fig:verificacion} se ilustran el acondicionamiento del rango d
 
 \subsection{Resultados}
 
-\subsubsection{Mediciones}
+\subsubsection{Funcionamiento}
+Se miden las diferentes se\~nales generadas por el oscilador controlado por tensi\'on, en los casos l\'imite de la entrada de tensi\'on, as\'i
+verificando el funcionamiento con las frecuencias y amplitud deseada.
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c c}
+        \includegraphics[scale=0.2]{../EJ3/Mediciones/Actuales/Osciloscopio/Distorsion_1k/cropped_scope_0.png} & 
+        \includegraphics[scale=0.2]{../EJ3/Mediciones/Actuales/Osciloscopio/Distorsion_10k/cropped_scope_13.png} 
+    \end{tabular}
+    \caption{Medici\'on de se\~nal cuadrada, triangular, senoidal del VCO con casos $V_i = 0V$ y $V_i = 5V$}
+    \label{fig:mediciones_funcionamiento}
+\end{figure}
+
+\subsubsection{Distorsi\'on Arm\'onica}
+Para la determinaci\'on de la distorsi\'on arm\'onica total de la senoidal generada por el oscilador, es necesario medir la transformada Fourier
+para analizar la composici\'on espectral de la se\~nal y analizar la magnitud de los arm\'onicos no deseados que componen a la distorsi\'on mencionada.
+Para ello se utiliza la transformada r\'apida de Fourier con el osciloscopio y se obtiene:
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c c}
+        \includegraphics[scale=0.2]{../EJ3/Mediciones/Actuales/Osciloscopio/Distorsion_1k/scope_2.png} &
+        \includegraphics[scale=0.2]{../EJ3/Mediciones/Actuales/Osciloscopio/Distorsion_10k/scope_11.png}
+    \end{tabular}
+    \caption{Medici\'on de la FFT de la se\~nal senoidal. En la izquierda para $f = 1kHz$ y en la derecha $f = 10kHz$}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c c}
+        $f [Hz]$ & $A [dBV]$ & $A [V^{2}]$ \\
+        \hline \\
+        $1k$ & $-4.58$ & $0.348$ \\
+        $2k$ & $-40.5$ & $8.95 \cdot 10^{-5}$ \\
+        $3k$ & $-59.8$ & $1.05 \cdot 10^{-6}$ \\
+        $4k$ & $-75.1$ & $3.08 \cdot 10^{-8}$ \\
+        $5k$ & $-85.3$ & $2.94 \cdot 10^{-9}$ \\
+        $6k$ & $-86.7$ & $2.14 \cdot 10^{-9}$ \\
+        $7k$ & $-85$ & $3.16 \cdot 10^{-9}$ \\
+        $8k$ & $-93.1$ & $4.89 \cdot 10^{-10}$ \\
+        $9k$ & $-92.1$ & $6.17 \cdot 10^{-10}$ \\
+        \hline \\
+    \end{tabular}
+    \caption{Medici\'on con $f = 1kHz$}
+\end{table}
+
+\begin{equation}
+    THD_{f = 1kHz} = 1.61 \%
+\end{equation}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c c}
+        $f [Hz]$ & $A [dBV]$ & $A [V^{2}]$ \\
+        \hline \\
+        $10k$ & $-2.51$ & $0.56$ \\
+        $20k$ & $-36.9$ & $0.000205$ \\
+        $30k$ & $-33.7$ & $0.0004$ \\
+        $40k$ & $-58.6$ & $1.38 \cdot 10^{-6}$ \\
+        $50k$ & $-53.7$ & $4.24 \cdot 10^{-6}$ \\
+        $60k$ & $-72.4$ & $5.72 \cdot 10^{-8}$ \\
+        $70k$ & $-74.6$ & $3.46 \cdot 10^{-8}$ \\
+        $80k$ & $-80.3$ & $9.23 \cdot 10^{-9}$ \\
+        $90k$ & $-82.2$ & $6.02 \cdot 10^{-9}$ \\
+        \hline \\
+    \end{tabular}
+    \caption{Medici\'on con $f = 1kHz$}
+\end{table}
+
+\begin{equation}
+    THD_{f = 10kHz} = 3.36 \%
+\end{equation}
+
+\subsubsection{Medida de Jitter}
+Para determinar la medida de Jitter, se tomaron mediciones del per\'iodo de la se\~nal en cada caso a lo largo de un determinado
+tiempo y luego, utilizando las herramientas del osciloscopio de Quick Measure, se determinaron los valores medios, m\'inimo, m\'aximo y
+la desviaci\'on est\'andar. En conclusi\'on, se puede observar la medida del Jitter en la desviaci\'on est\'andar de la medici\'on en la Fig. \ref{fig:medida_jitter}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c c}
+        \includegraphics[scale=0.2]{../EJ3/Mediciones/Actuales/Osciloscopio/Jitter/cropped_scope_19.png} &
+        \includegraphics[scale=0.2]{../EJ3/Mediciones/Actuales/Osciloscopio/Jitter/cropped_scope_20.png}
+    \end{tabular}    
+    \caption{Medida del Jitter medida en el osciloscopio}
+    \label{fig:medida_jitter}
+\end{figure}
 
 \subsubsection{An\'alisis de resultados}
+En primer lugar, existe un error en las frecuencias obtenidas respecto de lo consignado que no se mantiene de forma homog\'enea para todo valor de frecuencia,
+lo cual se asume que se debe a la tensi\'on de saturaci\'on del amplificador. Al ser medido se pudo observar que en los extremos existe una ligera diferencia.
+Esto se atribuye a las limitaciones de corriente y slew rate del amplificador operacional, con lo cual a mayor frecuencia se puede acrecentar tales variaciones,
+modificando los valores l\'imite del comparador que controla la oscilaci\'on. No obstante, este error fue compensado dentro de lo aceptable con la etapa de acondicionamiento lineal.
+
+En segundo lugar, es razonable considerar que las frecuencias bajas tendr\'an mayor error dado que implica una carga del capacitor con corrientes constantes de menor magnitud,
+por ende se vuelven m\'as apreciables a los valores de corrientes de bias y offset del amplificador operacional, por ende introduce un error relativo mayor.
+
+En tercer lugar, otro aspecto que introduce error que puede depender de la frecuencia de oscilaci\'on del circuito, es el transistor MOS, ya que su entrada tiene atribuida una capacidad
+que requiere un determinado tiempo transitorio para acumular cargas y lograr que se abra el canal de conducci\'on, por lo cual, siempre puede existir un determinado tiempo de retardo que desfasa
+la onda cuadrada y la triangular e introduce errores temporales.
+
+Finalmente, los valores de THD de la senoidal de salida se consideran aceptables dentro de lo esperado, no obstante si en vez de utilizar componentes discretos pudieran recrearse condiciones \'optimas
+empleando un circuito con mejores relaciones, ya sea de tolerancia o de paridad entre transistores, en te\'oria desde un punto de vista ideal podr\'ia reducirse hasta $0.02\%$.
 
 \subsection{Conclusiones}
+El oscilador controlado por tensi\'on es un circuito que permite generar de forma sencilla ondas de frecuencia variable y controladas por una tensi\'on de entrada, cuyo error se puede ver acotado si toman
+medidas espec\'ificas para ello como la utilizaci\'on de comparadores de alta velocidad y amplificadores operacionales cuya salida pueda alcanzar la tensi\'on de alimentaci\'on, es decir, rail-to-rail. Luego,
+se puede obtener una salida senoidal con una baja distorsi\'on siempre y cuando se garantice que se cumplan mejor las condiciones \'optimas del par diferencial del convertidor. Este circuito garantiza
+la generaci\'on de ondas senoidales con frecuencia variable, y puede ser empleado para modulaci\'on en frecuencia y circuitos de PLL.

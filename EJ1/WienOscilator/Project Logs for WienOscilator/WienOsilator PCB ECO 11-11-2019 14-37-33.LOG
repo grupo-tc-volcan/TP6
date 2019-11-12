@@ -1,0 +1,6 @@
+Change Component Footprint: Designator=D1 Old Footprint=DO-35 New Footprint=DO41
+Change component parameters: Designator = "D1"; Footprint = "DO41"; UniqueID = "\WEWGLGKE"
+Change component parameters. Clean all parameters for all variants
+Added Pin To Net: NetName=GND Pin=U1-5
+Added Pin To Net: NetName=GND Pin=U1-6
+Added Room: Name=WienOscilator

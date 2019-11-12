@@ -1,0 +1,17 @@
+Added Component: Designator=J1(BORNERA3)
+Add component. Clean all parameters for all variants
+Added Component: Designator=TP1(TPTH)
+Add component. Clean all parameters for all variants
+Added Component: Designator=TP2(TPTH)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=-18 Pin=J1-1
+Added Pin To Net: NetName=GND Pin=J1-2
+Added Pin To Net: NetName=+18 Pin=J1-3
+Added Pin To Net: NetName=NetC1_1 Pin=TP1-1
+Added Pin To Net: NetName=NetD1_2 Pin=TP2-1
+Change Net Name : Old Net Name=NetC1_1 New Net Name=IN
+Change Net Name : Old Net Name=NetD1_2 New Net Name=OUT
+Added Member To Class: ClassName=WienOscilator Member=Component J1 SOURCE
+Added Member To Class: ClassName=WienOscilator Member=Component TP1 TP
+Added Member To Class: ClassName=WienOscilator Member=Component TP2 TP
+Added Room: Name=WienOscilator

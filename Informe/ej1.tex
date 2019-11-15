@@ -62,11 +62,57 @@ las condiciones puede ser cumplida evaluando en $f_0$, mientras que la primera p
 
 
 \subsubsection{Desviaciones del circuito básico}
+Si bien el circuito previamente mencionado puede ser utilizado para buscar de forma más sencilla las relaciones que determinan el cumplimiento o no de la oscilación, en 
+la práctica deben de hacerse modificaciones que prevengan al circuito de las variaciones intrínsecas a la utilización de componentes reales.
+Como se dijo en la sección anterior, para que se cumpla el criterio de Barkausen, debe darse que $\frac{R_2}{R_1} = 2$ exactamente; sin embargo, esta característica no 
+puede ser lograda en la realidad con simples componentes pasivos, razón por la cual el circuito original de la Figura \ref{fig:basic_wien_osc_ex1}, es reemplazado por el 
+de la Figura \ref{fig:wein_osc_circuit_ex1}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../EJ1/Recursos/wein_osc_circuit.jpg}
+    \caption{Circuito utilizado.}
+    \label{fig:wein_osc_circuit_ex1}
+\end{figure}
+
+\textbf{Transistor JFET}\\
+La principal diferencia yace en la inclusión de un JFET-N en la realimentación negativa, en serie con $R_1$, cuya función es la de resistencia variable 
+dinámicamente.
+Mediante esta incorporación, puede colocarse una resistencia en $R_1$ de valor tal que $\frac{R_2}{R_1} > 2$ que en el encendido del circuito favorezca 
+la realimentación positiva, y se inicie la oscilación.
+Una vez llegado al valor deseado de tensión de salida de la señal (fijado por los diodos, y explicado en el siguiente ítem), la tensión en el Gate del 
+transistor se modificará achicando el ancho del canal y aumentando entonces la resistencia del mismo.
+Con este mecanismo es que se logra que la ganancia del lazo negativo llegue a la condición de $\frac{R_2}{R_1} = 2$.
+
+La elección de qué tipo de JFET se usa va de la mano de la disposición de los diodos.
+Cabe recordar que un JFET canal N disminuirá el ancho de su canal conforme se aplique tensión negativa en su Gate, mientras que el canal P lo hará ante 
+tensiones de valor positivo.
+Consecuentemente, el uso de un canal N realizará un control de la oscilación a través del semiciclo negativo de la misma, mientras que un canal P lo hará 
+para el positivo.
+
+Otro aspecto a considerar es la zona de utilización del transistor y el rango de variación de la tensión en el Gate.
+Este JFET está siendo usado en la zona lineal, con bajas tensiones en el Gate, empleándose como resistencia variable.
+En cuanto a la variación de estas tensiones, se pretende que sean chicas, ya que la no linealidad en la respuesta del transistor podría introducir 
+distorsiones en caso de que no lo fueran.
+
+\textbf{Diodo rectificador y Zener ($D_R$ y $D_Z$)}
+Su función, como bien se mencionó antes, es la de limitar la amplitud de la señal generada a la salida.
+Cada vez que la salida del operacional supera el valor dado por $V_Z + V_D$, más la tensión en el capacitor cargado, los diodos limitan la amplitud a la 
+salida.
+En el circuito de la Figura \ref{fig:wein_osc_circuit_ex1}, los diodos están dispuestos de forma tal que la limitación de la amplitud se dé en el 
+semiciclo negativo, dado que se está utilizando un JFET canal N para el control de la ganancia del lazo negativo.
+En caso de querer usar un JFET canal P, ambos deberían ser invertidos en su conexión, para permitir el control en el semiciclo positivo.
+
+\textbf{Capacitor y resistencia $R_x$ y $C_x$}
+Esta malla RC, la cual puede ser vista como un pasa-bajos, cumple la función de mantener la polarización del transistor JFET durante todo el ciclo de la 
+senoidal.
+Se busca que la constante de tiempo del mismo sea alta, para lograr así el deseado efecto de que la variación en la tensión de Gate sea baja, y esto se 
+logra colocando valores altos de $R_x$.
 
 
 
 \subsection{Diseño y función de los componentes}
 \subsubsection{Lazo de realimentación positiva}
+
 
 
 \subsubsection{Lazo de realimentación negativa}

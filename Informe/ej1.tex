@@ -28,6 +28,7 @@ El mismo puede ser pensado como un amplificador realimentado tanto positiva como
 La tensión de entrada a este no inversor puede ser puesta en función de los parámetros del lazo negativo mediante la ecuación \ref{eq:v_p_by_v_o_ex1}.
 \begin{align*}
     & V_p = V_o \frac{R // \frac{1}{j \cdot 2\pi \cdot f \cdot C}}{\left( R // \frac{1}{j \cdot 2\pi \cdot f \cdot C} \right) + \left( R + \frac{1}{j \cdot 2\pi \cdot f \cdot C}\right)}
+    \label{eq:v_p_by_v_o_ex1}
 \end{align*}
 Manipulando algebraicamente esta expresión se obtiene la ganancia debida al lazo positivo:
 \begin{align}
@@ -36,7 +37,7 @@ Manipulando algebraicamente esta expresión se obtiene la ganancia debida al laz
 \end{align}
 Donde:
 \begin{align}
-    & f_0 = \frac{1}{j \cdot 2\pi \cdot R \cdot C}
+    & f_0 = \frac{1}{2\pi \cdot R \cdot C}
     \label{eq:osc_freq_ex1}
 \end{align}
 
@@ -54,6 +55,30 @@ De la observación de esta transferencia puede deducirse que se trata de un pasa
 \end{align}
 
 
+\subsubsection{Transferencia del circuito}
+Este circuito puede ser modelizado como uno realimentado para el cual se cumple que:
+\begin{align*}
+    & H(s) = \frac{A(s)}{1 + A(s) \cdot \beta(s)}
+\end{align*}
+
+Donde para $A(s)$ suficientemente grande, se puede aproximar la expresión a:
+\begin{align*}
+    & H(s) \approx \frac{1}{\beta(s)}
+\end{align*}
+
+Con:
+\begin{align*}
+    & \beta(s) = \frac{1 + T(s)}{T(s)}
+\end{align*}
+
+Y finalmente:
+\begin{align}
+    & H(s) \approx \frac{\left(\frac{R_2}{R_1} + 1\right) \cdot \left(C^2 \cdot R^2 \cdot s^2 + 3 \cdot C \cdot R \cdot s + 1\right)}
+    {C^2 \cdot R^2 \cdot s^2 + \left(\frac{R_2}{R_1} + 4\right) \cdot C \cdot R \cdot s + 1}
+    \label{eq:transference_ex1}
+\end{align}
+
+
 \subsubsection{Criterio de Barkhausen}
 El criterio de Barkhausen dicta las condiciones que deben cumplirse en oscilador como el de Wien para que se cumpla la condición de oscilación y determina la frecuencia a 
 la que se dará el mismo.
@@ -64,14 +89,14 @@ las condiciones puede ser cumplida evaluando en $f_0$, mientras que la primera p
 \subsubsection{Desviaciones del circuito básico}
 Si bien el circuito previamente mencionado puede ser utilizado para buscar de forma más sencilla las relaciones que determinan el cumplimiento o no de la oscilación, en 
 la práctica deben de hacerse modificaciones que prevengan al circuito de las variaciones intrínsecas a la utilización de componentes reales.
-Como se dijo en la sección anterior, para que se cumpla el criterio de Barkausen, debe darse que $\frac{R_2}{R_1} = 2$ exactamente; sin embargo, esta característica no 
+Como se dijo en la sección anterior, para que se cumpla el criterio de Barkhausen, debe darse que $\frac{R_2}{R_1} = 2$ exactamente; sin embargo, esta característica no 
 puede ser lograda en la realidad con simples componentes pasivos, razón por la cual el circuito original de la Figura \ref{fig:basic_wien_osc_ex1}, es reemplazado por el 
 de la Figura \ref{fig:wein_osc_circuit_ex1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{../EJ1/Recursos/wein_osc_circuit.jpg}
     \caption{Circuito utilizado.}
-    \label{fig:wein_osc_circuit_ex1}
+    \label{fig:wein_osc_circuit_ex1}    
 \end{figure}
 
 \textbf{Transistor JFET}\\
@@ -93,6 +118,7 @@ Otro aspecto a considerar es la zona de utilización del transistor y el rango d
 Este JFET está siendo usado en la zona lineal, con bajas tensiones en el Gate, empleándose como resistencia variable.
 En cuanto a la variación de estas tensiones, se pretende que sean chicas, ya que la no linealidad en la respuesta del transistor podría introducir 
 distorsiones en caso de que no lo fueran.
+\newline
 
 \textbf{Diodo rectificador y Zener ($D_R$ y $D_Z$)}
 Su función, como bien se mencionó antes, es la de limitar la amplitud de la señal generada a la salida.
@@ -102,7 +128,13 @@ En el circuito de la Figura \ref{fig:wein_osc_circuit_ex1}, los diodos están di
 semiciclo negativo, dado que se está utilizando un JFET canal N para el control de la ganancia del lazo negativo.
 En caso de querer usar un JFET canal P, ambos deberían ser invertidos en su conexión, para permitir el control en el semiciclo positivo.
 
-\textbf{Capacitor y resistencia $R_x$ y $C_x$}
+En caso de querer modificar la amplitud a la salida de la señal, hay dos caminos que pueden tomarse.
+El primero y más sencillo es elegir convenientemente el diodo Zener a utilizar; sin embargo, si se requiere un valor de salida que no pueda ser satisfecho 
+mediante valores comerciales de los Zener, puede colocarse una resistencia en la rama de los diodos que, al momento en que los diodos permitan el paso de 
+la corriente, caerá una tensión sobre ella que permitirá el aumento de la amplitud en la senoidal.
+\newline
+
+\textbf{Capacitor y resistencia $R_x$ y $C_x$} \label{sec:r_x_c_x_ex1}
 Esta malla RC, la cual puede ser vista como un pasa-bajos, cumple la función de mantener la polarización del transistor JFET durante todo el ciclo de la 
 senoidal.
 Se busca que la constante de tiempo del mismo sea alta, para lograr así el deseado efecto de que la variación en la tensión de Gate sea baja, y esto se 
@@ -112,27 +144,65 @@ logra colocando valores altos de $R_x$.
 
 \subsection{Diseño y función de los componentes}
 \subsubsection{Lazo de realimentación positiva}
+En cumplimiento con el parámetro de diseño de $f_0 = 77.5KHz$, y dados los dos grados de libertad ($C$ y $R$) de los que se dispone para el diseño de un 
+oscilador que cumpla con lo pedido, se fija en primer lugar $C = 1nF$, ya que será más sencillo ajustar un valor de resistencia que de un capacitor.
+Como consecuencia de esto, y haciendo uso de la ecuación \ref{eq:osc_freq_ex1}, se obtiene que:
+\begin{align*}
+    & R = \frac{1}{2\pi \cdot C \cdot f_0} \approx 2.05K\Omega
+\end{align*}
 
+Dado que no se cuenta con un valor comercial para esa resistencia, y teniendo en cuenta la importancia crítica de este parámetro, se decide colocar un 
+preset para calibrar este aspecto post-diseño.
 
 
 \subsubsection{Lazo de realimentación negativa}
-
-
-\subsubsection{Diodo rectificador y diodo Zener}
-
-
-\subsubsection{Transistor JFET}
-
-
-\subsubsection{Polarización del JFET ($C_3$ y $R_x$)}
+Para la determinación de los valores de resistencias $R_1$ y $R_2$, se retoma lo dicho en el marco teórico sobre la necesidad de que, inicialmente, 
+$\frac{R_2}{R_1} > 2$.
+Nuevamente se tienen dos grados de libertad, de modo que se fija $R_2 = 100K\Omega$, y se busca $R_1 < 50K\Omega$, encontrando como valor comercial más 
+conveniente $R_1 = 47K\Omega$.
+Para el Control Automático de Ganancia (CAG), compuesto por el diodo rectificador, el diodo Zener, el transistor y el pasa-bajos de $C_x$ y $R_x$, 
+se seleccionan los componentes 1N4148, 1N5230, MPF102, $10\mu F$ y $1M\Omega$, respectivamente.
+Los últimos dos son elegidos respetando el criterio de la sección \ref{sec:r_x_c_x_ex1}, con la intensión de que la descarga del capacitor sea lo 
+suficientemente lenta
 
 
 \subsubsection{Selección del operacional a utilizar}
+Para la selección del amplificador operacional al utilizar se tienen en cuenta diferentes aspectos característicos de los mismos que hacen a la 
+performance del circuito en el que serán empleados.
+
+Algunas de estas características importantes son la tensión de saturación, slew rate y cross-over, ya que estos aspectos pueden tener implicancia en la 
+distorsión armónica de la señal en la salida.
+Además, ha de observarse también el GBP del amplificador, ya que la presencia de polos que distorsionen la fase en frecuencias cercanas a la de diseño 
+podría provocar problemas para el cumplimiento del criterio de Barkhausen.
+
+La información recopilada de hojas de datos es comprimida en la tabla \ref{tab:opamp_comparison_ex1}, de la cual se analizan como buenas opciones a los 
+operacionales TL082, TL072 y LM833.
+Se considera que cualquiera de estas tres opciones satisface los requerimientos de este circuito, razón por la cual la decisión final de elegir al TL082 
+se basa en buenas experiencias previas con el uso de este amplificador.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|ccccccc}
+    \textbf{Operacional} & \textbf{$A_{vol}$} & \textbf{$GBP$} & \textbf{$Z_{in}$} & \textbf{$Z_{out}$} & \textbf{$SR$}         & \textbf{$THD$} & \textbf{$V_{CC_{max}}$} \\ \hline
+    \textbf{TL082}       & $200 \cdot 10^3$   & $3MHz$         & $10^12\Omega$     & $-$                & $13 \frac{V}{\mu s}$  & $< 0.0003$     & $18V$                   \\
+    \textbf{TL072}       & $200 \cdot 10^3$   & $3MHz$         & $10^12\Omega$     & $-$                & $13 \frac{V}{\mu s}$  & $< 0.0003$     & $36V$                   \\
+    \textbf{LM833}       & $316 \cdot 10^3$   & $16MHz$        & $2^12\Omega$      & $37\Omega$         & $13 \frac{V}{\mu s}$  & $< 0.0002$     & $36V$                   \\
+    \textbf{LM324}       & $100 \cdot 10^3$   & $1.2MHz$       & $2^6\Omega$       & $-$                & $0.5 \frac{V}{\mu s}$ & $-$            & $32V$                   \\
+    \textbf{LM741}       & $200 \cdot 10^3$   & $1.5MHz$       & $2^6\Omega$       & $75\Omega$         & $13 \frac{V}{\mu s}$  & $0.0006$       & $22V$                  
+    \end{tabular}
+    \caption{Comparación de operacionales.}
+    \label{tab:opamp_comparison_ex1}
+\end{table}
 
 
 
 \subsection{Caracterización del sistema}
 \subsubsection{Singularidades}
+La posición de las singularidades en el plano complejo es de vital importancia para estos circuitos osciladores, es por eso que una correcta caracterización 
+del mismo requiere de un análisis de singularidades.
+En el presente artículo, este análisis se realizará sometiéndolo a variaciones en la resistencia variable lograda con el transistor JFET, y mediante el 
+auxilio de software de cálculo como los módulos de lenguaje Python scipy.
+
+El resultado de este análisis es el ilustrado en la Figura
 
 
 \subsubsection{Sensibilidades}
@@ -150,3 +220,4 @@ logra colocando valores altos de $R_x$.
 
 
 \subsubsection{Distorsión armónica}
+

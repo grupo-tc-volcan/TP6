@@ -142,7 +142,7 @@ logra colocando valores altos de $R_x$.
 
 
 
-\subsection{Diseño y función de los componentes}
+\subsection{Elección de componentes}
 \subsubsection{Lazo de realimentación positiva}
 En cumplimiento con el parámetro de diseño de $f_0 = 77.5KHz$, y dados los dos grados de libertad ($C$ y $R$) de los que se dispone para el diseño de un 
 oscilador que cumpla con lo pedido, se fija en primer lugar $C = 1nF$, ya que será más sencillo ajustar un valor de resistencia que de un capacitor.
@@ -160,6 +160,8 @@ Para la determinación de los valores de resistencias $R_1$ y $R_2$, se retoma l
 $\frac{R_2}{R_1} > 2$.
 Nuevamente se tienen dos grados de libertad, de modo que se fija $R_2 = 100K\Omega$, y se busca $R_1 < 50K\Omega$, encontrando como valor comercial más 
 conveniente $R_1 = 47K\Omega$.
+En este caso también será utilizado un preset para modificar la resistencia $R_1$ hasta la condición buscada.
+
 Para el Control Automático de Ganancia (CAG), compuesto por el diodo rectificador, el diodo Zener, el transistor y el pasa-bajos de $C_x$ y $R_x$, 
 se seleccionan los componentes 1N4148, 1N5230, MPF102, $10\mu F$ y $1M\Omega$, respectivamente.
 Los últimos dos son elegidos respetando el criterio de la sección \ref{sec:r_x_c_x_ex1}, con la intensión de que la descarga del capacitor sea lo 
@@ -201,8 +203,8 @@ La posición de las singularidades en el plano complejo es de vital importancia 
 del mismo requiere de un análisis de singularidades.
 
 En el presente artículo, este análisis se realizará sometiéndolo a variaciones en la resistencia variable lograda con el transistor JFET, y mediante el 
-auxilio de software de cálculo como los módulos de lenguaje Python scipy.
-Se hizo variar la misma entre los valores de $0$ a $5K\Omega$ con un paso de $100\Omega$, y el resultado es el ilustrado en la Figura \ref{fig:closed_loop_poles_ex1}.
+auxilio de software de cálculo como los módulos de lenguaje Python, scipy.
+Se hizo variar tal resistencia entre los valores de $0$ a $5K\Omega$ con un paso de $100\Omega$, y el resultado es el ilustrado en la Figura \ref{fig:closed_loop_poles_ex1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{../EJ1/Recursos/closed_loop_poles.png}
@@ -213,7 +215,7 @@ Se hizo variar la misma entre los valores de $0$ a $5K\Omega$ con un paso de $10
 Puede apreciarse como para todos los valores tomados, los polos se encuentran encimados sobre el eje imaginario, condición que permitirá la oscilación.
 
 Por otro lado, haciendo uso de la transferencia del sistema expresada en la ecuación \ref{eq:transference_ex1}, y aplicando la misma variación del parámetro 
-de la resistencia del JFET, se obtiene el diagrama de la Figura \ref{fig:transference_poles_and_zeros_ex1}
+de la resistencia del JFET, se obtiene el diagrama de la Figura \ref{fig:transference_poles_and_zeros_ex1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{../EJ1/Recursos/transference_poles_and_zeros.png}
@@ -234,15 +236,130 @@ de los que depende), son:
 
 
 
-\subsection{Simulación, resultados y comparación}
-\subsubsection{Frecuencia de oscilación}
+\subsection{Simulación}
+Mediante herramientas de simulación como LTspice, se procede a simular el circuito propuesto para ver algunas de sus características y luego compararlas 
+con los resultados medidos.
+
+Tal como se explicó en secciones previas, existe un tiempo de establecimiento de la señal para el cual la realimentación positiva amplifica gradualmente 
+la señal a la salida hasta llegar a la amplitud estacionaria.
+Este tiempo puede ser observado mediante la lectura del gráfico \ref{fig:time_ex1}, que 
+indica que se se puede considerar la señal en estado estacionario una vez transcurridos los $10ms$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../EJ1/Recursos/time.png}
+    \caption{Establecimiento de la señal simulada.}
+    \label{fig:time_ex1}    
+\end{figure}
+
+Además del tiempo de establecimiento, es interesante observar desde la simulación el espectro de la señal generada, el cual es de utilidad para determinar 
+la distorsión armónica total (THD por su sigla en inglés).
+La misma es calculada mediante el cociente $\frac{P_{armonicos}}{P_{total}}$, y nos da una idea de la potencia perdida de la señal en 
+frecuencias armónicas que no son de nuestro interés.
+En esta ecuación, $P_{armonicos}$ es la potencia de los armónicos, mientras que $P_{total}$ es además con la potencia de la senoidal principal sumada.
+
+El espectro de la señal es el que se ilustra en la Figura \ref{fig:fft_ex1} y del cual se extraen los valores de los principales armónicos de la tabla \ref{tab:thd_ex1}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../EJ1/Recursos/fft.png}
+    \caption{Establecimiento de la señal simulada.}
+    \label{fig:fft_ex1}    
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c}
+    \textbf{Potencia (dB)} \\ \hline
+    $11$                   \\
+    $-23.9$                \\
+    $-32.3$                \\
+    $-42.5$                \\
+    $-41.8$                \\
+    $-54.1$                \\
+    $-48.5$                \\
+    $-49.7$               
+    \end{tabular}
+    \caption{Potencia de los primero armónicos.}
+    \label{tab:thd_ex1}
+\end{table}
+
+Con los valores de la tabla, y haciendo uso de la ecuación del THD, se obtiene que:
+\begin{align*}
+    & THD = 0.0308
+\end{align*}
 
 
-\subsubsection{Tensión de salida}
+
+\subsection{Resultados y análisis}
+Se implementa el diseño en un PCB, el cual es luego sometido a mediciones para corroborar que cumpla con los requerimientos para los cuales fue diseñado.
+A continuación se detallan las mediciones que se realizaron sobre el circuito y las conclusiones a las que se llegó.
+
+
+\subsubsection{Frecuencia y amplitud de oscilación}
+La frecuencia de oscilación es el principal parámetro de diseño y al cual se le prestó mayor atención a la hora de que se cumpliese, obteniéndose resultados 
+satisfactorios luego de una calibración fina de las resistencias utilizadas mediante presets.
+
+La Figura \ref{fig:actual_freq_ex1} representa la señal obtenida en régimen permanente, de donde se puede apreciar de las mismas mediciones del osciloscopio 
+como la frecuencia lograda es la buscada.
+No es ese el caso para la amplitud, donde se esperaba una salida por encima de los $10.8 V_{pp}$, derivados de la suma de las tensiones del Zener y del 
+diodo rectificador.
+En cambio, la salida medida es de $8.94V_{pp}$, y se conjetura que este valor por debajo de lo esperado puede deberse a variaciones en la tensión del Zener.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../EJ1/Recursos/actual_freq.png}
+    \caption{Oscilación en régimen permanente con la frecuencia de diseño.}
+    \label{fig:actual_freq_ex1}    
+\end{figure}
+
+Variando el preset utilizado para el circuito se lo llevo a las máximas y mínimas frecuencias a las que se pudo hacer oscilar al circuito, y las mismas fueron 
+de $68.5KHz$ a $93KHz$, mediciones que pueden ser corroboradas mediante la Figura \ref{fig:min_max_freq_ex1}.
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c}
+        \includegraphics[width=0.7\textwidth]{../EJ1/Recursos/min_freq.png} \\
+        \includegraphics[width=0.7\textwidth]{../EJ1/Recursos/max_freq.png}
+    \end{tabular}
+    \caption{Mínima y máxima frecuencia de oscilación del circuito.}
+    \label{fig:min_max_freq_ex1}    
+\end{figure}
+
+Y finalmente se estudió el rango de amplitud de señal de salida que podía ofrecer este oscilador, el cual, además de ser dependiente de los diodos, lo es 
+de la tensión de alimentación del operacional, que cabe recordar que puede ser alimentado hasta con $18V_{pp}$ según recomendaciones de su datasheet.
+
+Se buscó la amplitud del circuito en esta condición límite, para la frecuencia de diseño, así como para la mínima alimentación con la cual se apreciaba 
+oscilación a la salida, que fue con $V_{CC} = \pm3V$.
+Los resultados encontrados son los de la Figura \ref{fig:min_max_amp_ex1}, con $1.25V_{pp}$ de mínima y $10.5V_{pp}$ de máxima.
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c}
+        \includegraphics[width=0.7\textwidth]{../EJ1/Recursos/min_amp.png} \\
+        \includegraphics[width=0.7\textwidth]{../EJ1/Recursos/max_amp.png}
+    \end{tabular}
+    \caption{Mínima y máxima amplitud de oscilación del circuito.}
+    \label{fig:min_max_amp_ex1}    
+\end{figure}
 
 
 \subsubsection{Establecimiento de la señal}
+Se observó también mediante el modo de Roll del osciloscopio el establecimiento de la señal, y lo medido es lo que se muestra en la Figura \ref{fig:start_up_ex1}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../EJ1/Recursos/start_up.png}
+    \begin{tabular}{c c}
+        \includegraphics[width=0.7\textwidth]{../EJ1/Recursos/start_up_zoom_x1.png}
+        \includegraphics[width=0.7\textwidth]{../EJ1/Recursos/start_up_zoom_x2.png}
+    \end{tabular}
+    \caption{Establecimiento de la señal medido.}
+    \label{fig:start_up_ex1}    
+\end{figure}
+Se desprende del análisis de la figura que el tiempo de establecimiento ronda los $8ms$, en concordancia y hasta mejorando lo esperado desde la simulación.
 
 
-\subsubsection{Distorsión armónica}
 
+\subsection{Conclusión}
+A modo de cierre d esta sección se repasan los resultados obtenidos del diseño e implementación de un oscilador de Wien, cuyo parámetro de diseño es su 
+frecuencia de oscilación.
+Es justamente en esta restricción la que mejor se logró cumplir, ya que el ajuste del circuito mediante presets permitió una calibración precisa para acomodar 
+la frecuencia de oscilación al valor buscado.
+Resultaron también positivas las mediciones de tiempo de establecimiento, siendo del órden o incluso más rápido de lo esperado según simulación.
+Sin embargo, y por último, la amplitud de la oscilación se ubicó por debajo de los valores indicados, siendo esta la característica de menor desempeño de la 
+implementación.

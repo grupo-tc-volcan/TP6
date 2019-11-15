@@ -26,10 +26,10 @@ El mismo puede ser pensado como un amplificador realimentado tanto positiva como
 \end{align}
 
 La tensión de entrada a este no inversor puede ser puesta en función de los parámetros del lazo negativo mediante la ecuación \ref{eq:v_p_by_v_o_ex1}.
-\begin{align*}
+\begin{align}
     & V_p = V_o \frac{R // \frac{1}{j \cdot 2\pi \cdot f \cdot C}}{\left( R // \frac{1}{j \cdot 2\pi \cdot f \cdot C} \right) + \left( R + \frac{1}{j \cdot 2\pi \cdot f \cdot C}\right)}
     \label{eq:v_p_by_v_o_ex1}
-\end{align*}
+\end{align}
 Manipulando algebraicamente esta expresión se obtiene la ganancia debida al lazo positivo:
 \begin{align}
     & B(jf) = \frac{1}{3 + j \cdot \left(\frac{f}{f_0} - \frac{f_0}{f}\right)}
@@ -199,17 +199,42 @@ se basa en buenas experiencias previas con el uso de este amplificador.
 \subsubsection{Singularidades}
 La posición de las singularidades en el plano complejo es de vital importancia para estos circuitos osciladores, es por eso que una correcta caracterización 
 del mismo requiere de un análisis de singularidades.
+
 En el presente artículo, este análisis se realizará sometiéndolo a variaciones en la resistencia variable lograda con el transistor JFET, y mediante el 
 auxilio de software de cálculo como los módulos de lenguaje Python scipy.
+Se hizo variar la misma entre los valores de $0$ a $5K\Omega$ con un paso de $100\Omega$, y el resultado es el ilustrado en la Figura \ref{fig:closed_loop_poles_ex1}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../EJ1/Recursos/closed_loop_poles.png}
+    \caption{Polos del lazo cerrado.}
+    \label{fig:closed_loop_poles_ex1}    
+\end{figure}
 
-El resultado de este análisis es el ilustrado en la Figura
+Puede apreciarse como para todos los valores tomados, los polos se encuentran encimados sobre el eje imaginario, condición que permitirá la oscilación.
+
+Por otro lado, haciendo uso de la transferencia del sistema expresada en la ecuación \ref{eq:transference_ex1}, y aplicando la misma variación del parámetro 
+de la resistencia del JFET, se obtiene el diagrama de la Figura \ref{fig:transference_poles_and_zeros_ex1}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../EJ1/Recursos/transference_poles_and_zeros.png}
+    \caption{Polos del lazo cerrado.}
+    \label{fig:transference_poles_and_zeros_ex1}    
+\end{figure}
 
 
 \subsubsection{Sensibilidades}
+En el análisis de sensibilidades, el parámetro de interés en este trabajo es la frecuencia de oscilación, y será por lo tanto el parámetro al cual se 
+debe prestar atención y establecer su dependencia de los valores de los componentes del diseño.
+
+De la ecuación \ref{eq:osc_freq_ex1} puede observarse que las sensibilidades de la frecuencia de oscilación con respecto a $R$ y $C$ (únicos componentes 
+de los que depende), son:
+\begin{align*}
+    & S_C^{f_0} = S_R^{f_0} = -1
+\end{align*}
 
 
 
-\subsection{Resultados}
+\subsection{Simulación, resultados y comparación}
 \subsubsection{Frecuencia de oscilación}
 
 

@@ -4,18 +4,18 @@ import matplotlib.axes as axes
 import matplotlib.pyplot as plt
 import control
 
-r, r3, r4, r_jfet, c, s = sympy.symbols('R R_3 R_4 R_\{jfet\} C s') # To be printed in a latex style
+r3, r4, r_jfet, f0, s = sympy.symbols('R_3 R_4 R_\{jfet\} f_0 s') # To be printed in a latex style
 
-num = sympy.Poly((r3 / (r4 + r_jfet) + 1) * c**2 * r**2 * s**(2) + (r3 / (r4 + r_jfet) + 1) * 3 * c * r * s + 1, s)
-den = sympy.poly(c**2 * r**2 * s**(2) + (r3 / (r4 + r_jfet) + 4) * 3 * c * r * s + 1, s)
+num = sympy.Poly((r3 / (r4 + r_jfet) + 1) * (1 / (2 * numpy.pi * f0)) * s, s)
+den = sympy.poly(s**(2) + 3 * (1 / (2 * numpy.pi * f0)) * s + 1, s)
 
-num = num.subs({r:2050, c:10e-9, r3: 100000, r4:47000})
-den = den.subs({r:2050, c:10e-9, r3: 100000, r4:47000})
+num = num.subs({f0:77500, r3: 100000, r4:47000})
+den = den.subs({f0:77500, r3: 100000, r4:47000})
 
 poles = []
 zeros = []
 
-max_r_jfet = 100000
+max_r_jfet = 10000
 for i in range(0, max_r_jfet + 1000, 100):
     new_den = sympy.Poly(den.subs(r_jfet, i), s)
     new_num = sympy.Poly(num.subs(r_jfet, i), s)

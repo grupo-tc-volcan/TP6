@@ -1,0 +1,25 @@
+Removed Pin From Net: NetName=GND Pin=C3-1
+Removed Pin From Net: NetName=NetC3_2 Pin=C3-2
+Removed Pin From Net: NetName=NetR3_2 Pin=R6-1
+Change Component Footprint: Designator=C3 Old Footprint=CAP100RP2 New Footprint=CAP200
+Change Component Comment : Designator=R1 Old Comment=1K5 New Comment=1K8
+Change Component Comment : Designator=R2 Old Comment=1K PRES New Comment=500R PRES
+Change Component Comment : Designator=C3 Old Comment=1u New Comment=CAP
+Change Component Comment : Designator=R6 Old Comment=100K PRES New Comment=10K PRES
+Added Component: Designator=R8(0805)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R9(0805)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetC3_2 Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C3-2
+Added Pin To Net: NetName=NetR3_2 Pin=R8-2
+Change Net Name : Old Net Name=NetC3_2 New Net Name=NetC3_1
+Added Pin To Net: NetName=NetR6_1 Pin=R6-1
+Added Pin To Net: NetName=NetR6_1 Pin=R9-1
+Added Net: Name=NetR6_1
+Added Pin To Net: NetName=NetR8_1 Pin=R8-1
+Added Pin To Net: NetName=NetR8_1 Pin=R9-2
+Added Net: Name=NetR8_1
+Added Member To Class: ClassName=WienOscilator Member=Component R8 47K
+Added Member To Class: ClassName=WienOscilator Member=Component R9 47K
+Added Room: Name=WienOscilator

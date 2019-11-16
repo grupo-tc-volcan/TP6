@@ -1,12 +1,12 @@
 Board Information Report
-Filename     : C:\Users\facun\OneDrive\Desktop\ITBA\5C TC\TP6\EJ1\WienOscilator\WienOsilator.PcbDoc
-Date         : 11/11/2019
-Time         : 15:23:52
+Filename     : C:\Users\facun\OneDrive\Desktop\ITBA\5C TC\TP6\EJ1\PCB\WienOscilator\WienOsilator.PcbDoc
+Date         : 15/11/2019
+Time         : 17:59:02
 Time Elapsed : 00:00:00
 
 Routing Information
     Routing completion, 100.00%
-    Connections, 33
-    Connections routed, 33
+    Connections, 35
+    Connections routed, 35
     Connections remaining, 0
 count : 4

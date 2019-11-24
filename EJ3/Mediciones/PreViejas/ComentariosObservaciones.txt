@@ -1,0 +1,13 @@
+Observaciones:
+	+ El circuito funciona correctamente, pero tiene una desviación en la frecuencia, el error no es constante para cada entrada,
+	ni tampoco exactamente proporcional. Se da porque la salida del OPAMP no es lo que yo quiero... entonces se corre el valor de 
+	comparación hasta el cual carga!
+		* Caso Vi=5V => f=8.6kHz y Vmax = 5.64V Vmin = -5.92V en la triangular!
+		* Caso Vi=0V => f=971Hz  y Vmax = 5.03V Vmin = -5.14V en la triangular!
+
+	¿Cómo lo compenso? Moviendo el acondicionamiento de la señal para corregir las variacones...
+	Voffset = 1.0169V quiero desplazar a 1kHz... entonces el factor sería 1.029 => Voffset = 1.0473V
+	Voffset = 1.056V, luego Vacond = 9.96V => Como f = 8.44kHz y quiero 10kHz => factor = 1.1848
+		=> Quiero tene Vacond = 11.80V => Necesito incremento de 10.74V => 2.148 cociente de resistencias.
+	
+	CORREGIDO!

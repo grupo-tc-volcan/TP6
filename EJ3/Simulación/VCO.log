@@ -1,0 +1,22 @@
+Circuit: * C:\Users\Lucas\Documents\Actualmente Usando\Teoría de Circuitos\TP6\EJ3\Simulación\VCO.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Wed Nov 06 15:28:22 2019
+Total elapsed time: 3.261 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 102314
+traniter = 102287
+tranpoints = 50325
+accept = 50200
+rejected = 125
+matrix size = 97
+fillins = 73
+solver = Normal
+Thread vector: 5.7/4.2[2] 3.2/2.8[2] 1.0/1.7[1] 0.5/1.6[1]  2592/500
+Matrix Compiler1: 7.06 KB object code size  3.3/1.7/[0.5]
+Matrix Compiler2: 8.73 KB object code size  1.6/1.5/[0.8]
+

@@ -1,0 +1,51 @@
+Circuit: * C:\Users\Lucas\Documents\Actualmente Usando\Teoría de Circuitos\TP6\EJ3\Simulación\Draft1.asc
+
+Direct Newton iteration for .op point succeeded.
+Semiconductor Device Operating Points:
+                        --- Diodes ---
+Name:    d:m1:4      d:m1:3      d:m1:2      d:m1:1
+Model:   m1:md3      m1:md2      m1:md1       m1:md
+Id:      5.74e+00    5.74e+00    2.56e-13   -1.79e-23
+Vd:      2.56e-01    2.56e-01    2.56e-01   -2.56e-15
+Req:     1.80e-03    1.80e-03    1.00e+12    1.43e+08
+CAP:     0.00e+00    0.00e+00    1.08e-10    3.41e-11
+
+                        --- MOSFET Transistors ---
+Name:        m:m1:1
+Model:        m1:mm
+Id:          6.23e-16
+Vgs:         6.00e+00
+Vds:         1.86e-15
+Vbs:         0.00e+00
+Vth:         2.24e+00
+Vdsat:       3.76e+00
+Gm:          1.66e-16
+Gds:         3.51e-01
+Gmb:         0.00e+00
+Cbd:         0.00e+00
+Cbs:         0.00e+00
+Cgsov:       1.79e-11
+Cgdov:       1.07e-15
+Cgbov:       0.00e+00
+Cgs:         0.00e+00
+Cgd:         0.00e+00
+Cgb:         0.00e+00
+
+
+
+Date: Sat Nov 09 19:19:53 2019
+Total elapsed time: 1.486 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 10
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 18
+fillins = 4
+solver = Normal
+Matrix Compiler1: 986 bytes object code size
+Matrix Compiler2: 1.37 KB object code size
